@@ -12,6 +12,8 @@
 ;; Without this comment emacs25 adds (package-initialize) here
 ;; (package-initialize)
 
+;; ------------------------- from original emacs setup --------------------------------------------------
+
 ;; Increase gc-cons-threshold, depending on your system you may set it back to a
 ;; lower value in your dotfile (function `dotspacemacs/user-config')
 (setq gc-cons-threshold 100000000)
@@ -33,6 +35,7 @@
   (require 'server)
   (unless (server-running-p) (server-start)))
 
+;; ------------------------- tools / libraries / custom setups ------------------------------------------
 
 ;; load-user-file
 ;; load a custom .el lib from ~/.emacs.d/ directory
@@ -59,8 +62,30 @@
   (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
   (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
 
+;; projectile mode setup
+(projectile-mode +1)
 
-;; org-mode setups
+;; switch window mode
+(setq switch-window-shortcut-style 'qwerty)
+(setq switch-window-qwerty-shortcuts
+      '("a" "s" "d" "f" "j" "k" "l" ";" "w" "e" "i" "o"))
+(setq switch-window-shortcut-appearance 'asciiart)
+
+;; load timer
+(load-user-file "mike/timer.el")
+
+;; load textmate mode to enhence goto functions see: https://github.com/defunkt/textmate.el
+(load-user-file "mike/textmate.el")
+(require 'textmate)
+(textmate-mode)
+
+;; accomodate dropbox
+(setq desktop-base-file-name (concat ".desktop." (system-name)))
+
+
+;; ---------------------------------- org mode ------------------------------------------------------
+
+;; TODO keywords
 (setq org-todo-keywords
       '((sequence "IDEA" "TODO" "WIP" "PAUSED" "|" "DONE" "CANCELLED" "NOTE"  )))
 
@@ -75,32 +100,41 @@
 (setq org-startup-indented t)
 
 ;; org-mode archive-done-tasks
-(defun my-org-archive-done-tasks ()
+(defun my/org-archive-done-tasks ()
   (interactive)
   (org-map-entries 'org-archive-subtree "/DONE" 'file)
   (org-map-entries 'org-archive-subtree "/CANCELLED" 'file)
   )
 
+;; org-mode sort keywords
+(setq org-todo-sort-order '( "CANCELLED" "DONE" "NOTE" "PAUSED" "IDEA" "TODO" "WIP"))
 
-;; projectile mode setup
-(projectile-mode +1)
+(defun my/user-todo-sort (a b)
+  "Sort todo based on which I want to see first"
+  (when-let ((state-a (get-text-property 14 'todo-state a))
+             (state-b (get-text-property 14 'todo-state b))
+             (cmp (--map (cl-position-if (lambda (x)
+                                           (equal x it))
+                                         org-todo-sort-order)
+                         (list state-a state-b))))
+    (cond ((apply '> cmp) 1)
+          ((apply '< cmp) -1)
+          (t nil))))
+(setq org-agenda-cmp-user-defined 'my/user-todo-sort)
+(setq org-agenda-cmp-user-defined 'my/user-todo-sort)
 
-;; minapp development setups
-(setq auto-mode-alist (append '(("\\.wpy$" . vue))
-                              auto-mode-alist))
 
-;; switch window mode
-(setq switch-window-shortcut-style 'qwerty)
-(setq switch-window-qwerty-shortcuts
-      '("a" "s" "d" "f" "j" "k" "l" ";" "w" "e" "i" "o"))
-(setq switch-window-shortcut-appearance 'asciiart)
 
-;; load timer
-(load-user-file "mike/timer.el")
+;; ------------------------- language specific sections below ---------------------------------------
+
+;; ----- ruby -----
 
 ;; load ruby robocop fmter
 (load-user-file "mike/robocopfmt.el")
 (add-hook 'ruby-mode-hook #'rubocopfmt-mode)
 
-;;; accomodate dropbox
-(setq desktop-base-file-name (concat ".desktop." (system-name)))
+;; ----- wepy -----
+
+;; minapp development setups
+(setq auto-mode-alist (append '(("\\.wpy$" . vue))
+                              auto-mode-alist))

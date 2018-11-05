@@ -62,6 +62,10 @@
   (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
   (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
 
+;; auto-reload files from filesystem on git checkout branch
+(global-auto-revert-mode 1)
+(setq auto-revert-check-vc-info t)
+
 ;; projectile mode setup
 (projectile-mode +1)
 
@@ -82,6 +86,24 @@
 ;; accomodate dropbox
 (setq desktop-base-file-name (concat ".desktop." (system-name)))
 
+
+;; create dedicated window with c-c t
+(defun toggle-window-dedicated ()
+  "Control whether or not Emacs is allowed to display another
+buffer in current window."
+  (interactive)
+  (message
+   (if (let (window (get-buffer-window (current-buffer)))
+         (set-window-dedicated-p window (not (window-dedicated-p window))))
+       "%s: Can't touch this!"
+     "%s is up for grabs.")
+   (current-buffer)))
+
+;; make buffer sticky
+(global-set-key (kbd "C-c t") 'toggle-window-dedicated)
+
+;; display time inn the status line
+(display-time-mode 1)
 
 ;; ---------------------------------- org mode ------------------------------------------------------
 
@@ -131,7 +153,7 @@
 
 ;; load ruby robocop fmter
 (load-user-file "mike/robocopfmt.el")
-(add-hook 'ruby-mode-hook #'rubocopfmt-mode)
+;; (add-hook 'ruby-mode-hook #'rubocopfmt-mode)
 
 ;; ----- wepy -----
 

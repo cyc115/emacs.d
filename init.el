@@ -69,6 +69,22 @@
 ;; projectile mode setup
 (projectile-mode +1)
 
+;; tab-nine autocomplete
+(use-package company-tabnine :ensure t)
+(add-to-list 'company-backends #'company-tabnine)
+
+;; company mode setup
+(setq company-idle-delay 0)
+;; Number the candidates (use M-1, M-2 etc to select completions).
+(setq company-show-number t)
+;; Use the tab-and-go frontend.
+;; Allows TAB to select and complete at the same time.
+(company-tng-configure-default)
+(setq company-frontends
+      '(company-tng-frontend
+        company-pseudo-tooltip-frontend
+        company-echo-metadata-frontend))
+
 ;; switch window mode
 (setq switch-window-shortcut-style 'qwerty)
 (setq switch-window-qwerty-shortcuts
@@ -82,6 +98,9 @@
 (load-user-file "mike/textmate.el")
 (require 'textmate)
 (textmate-mode)
+(global-set-key (kbd "M-p") 'textmate-goto-file)
+(global-set-key (kbd "M-]") 'textmate-goto-symbol)
+
 
 ;; accomodate dropbox
 (setq desktop-base-file-name (concat ".desktop." (system-name)))
@@ -104,6 +123,7 @@ buffer in current window."
 
 ;; display time inn the status line
 (display-time-mode 1)
+
 
 ;; ---------------------------------- org mode ------------------------------------------------------
 

@@ -124,6 +124,9 @@ buffer in current window."
 ;; display time inn the status line
 (display-time-mode 1)
 
+;; open links from eamcs in the emacs embedded w3m browser
+(setq browse-url-browser-function  'w3m-goto-url-new-session)
+
 
 ;; ---------------------------------- org mode ------------------------------------------------------
 

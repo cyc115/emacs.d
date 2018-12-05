@@ -40,7 +40,7 @@ values."
      javascript
      markdown
      org
-     ruby
+     ruby-on-rails
      rust
      spell-checking
      syntax-checking

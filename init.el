@@ -10,7 +10,7 @@
 ;;; License: GPLv3
 
 ;; Without this comment emacs25 adds (package-initialize) here
-;; (package-initialize)
+(package-initialize)
 
 ;; ------------------------- from original emacs setup --------------------------------------------------
 
@@ -135,8 +135,22 @@ buffer in current window."
 (display-time-mode 1)
 
 ;; open links from eamcs in the emacs embedded w3m browser
-(setq browse-url-browser-function  'w3m-goto-url-new-session)
+;; (setq browse-url-browser-function  'w3m-goto-url-new-session)
 
+;; (setq
+;;  browse-url-browser-function
+;;  '(
+;;    ("github\\.braintreps.com" . browse-url-default-browser)
+;;    ("braintree" . browse-url-default-browser)
+;;    ("paypal" . browse-url-default-browser)
+;;    ("." . w3m-goto-url-new-session)
+;;    ))
+
+;; (when (fboundp 'w3m)
+;;   (defun w3m-config ()
+;;     (local-set-key (kbd "X") 'w3m-delete-buffer))
+
+;;   (add-hook 'w3m-emacs 'w3m-config))
 
 ;; ---------------------------------- org mode ------------------------------------------------------
 

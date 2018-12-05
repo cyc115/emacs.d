@@ -46,7 +46,8 @@
          user-init-directory)
         (t "~/.emacs.d/")))
 
-
+;; load-user-file loads a custom .el file from the provided directory
+;; eg. (load-user-file "mike/timer.el")
 (defun load-user-file (file)
   (interactive "f")
   "Load a file in current user's configuration directory"
@@ -101,8 +102,17 @@
 (global-set-key (kbd "M-p") 'textmate-goto-file)
 (global-set-key (kbd "M-]") 'textmate-goto-symbol)
 
+;; load ace-jump
+(load-user-file "mike/ace-jump.el")
+(autoload
+  'ace-jump-mode
+  "ace-jump-mode"
+  "emacs quick move minor mode"
+  t)
+(global-unset-key "\M-c")
+(define-key global-map (kbd "M-c") 'ace-jump-mode)
 
-;; accomodate dropbox
+;; Accomodate dropbox
 (setq desktop-base-file-name (concat ".desktop." (system-name)))
 
 

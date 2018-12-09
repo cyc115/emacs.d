@@ -215,8 +215,20 @@ regardless of whether the current buffer is in `eww-mode'."
 (setq org-agenda-cmp-user-defined 'my/user-todo-sort)
 (setq org-agenda-cmp-user-defined 'my/user-todo-sort)
 
+
 ;; display inline image size
 (setq org-image-actual-width nil)
+
+
+;; org-trello mode
+(require 'org-trello)
+(custom-set-variables
+ '(org-trello-files '(
+                      "/Users/yuecchen/Dropbox (Personal)/planning/elearn.org"
+                      )))
+
+(custom-set-variables '(org-trello-current-prefix-keybinding "C-c x"))
+
 
 
 ;; ------------------------- language specific sections below ---------------------------------------

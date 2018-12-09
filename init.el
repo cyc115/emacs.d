@@ -10,6 +10,8 @@
 ;;; License: GPLv3
 
 ;; Without this comment emacs25 adds (package-initialize) here
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
 
 ;; ------------------------- from original emacs setup --------------------------------------------------
@@ -112,6 +114,7 @@
 (global-unset-key "\M-c")
 (define-key global-map (kbd "M-c") 'ace-jump-mode)
 
+
 ;; Accomodate dropbox
 (setq desktop-base-file-name (concat ".desktop." (system-name)))
 
@@ -172,7 +175,7 @@ regardless of whether the current buffer is in `eww-mode'."
 
 ;; ---------------------------------- org mode ------------------------------------------------------
 
-;; TODO keywords
+;; set TODO keyword highlights
 (setq org-todo-keywords
       '((sequence "IDEA" "TODO" "WIP" "PAUSED" "|" "DONE" "CANCELLED" "NOTE"  )))
 
@@ -186,12 +189,14 @@ regardless of whether the current buffer is in `eww-mode'."
 
 (setq org-startup-indented t)
 
+
 ;; org-mode archive-done-tasks
 (defun my/org-archive-done-tasks ()
   (interactive)
   (org-map-entries 'org-archive-subtree "/DONE" 'file)
   (org-map-entries 'org-archive-subtree "/CANCELLED" 'file)
   )
+
 
 ;; org-mode sort keywords
 (setq org-todo-sort-order '( "CANCELLED" "DONE" "NOTE" "PAUSED" "IDEA" "TODO" "WIP"))

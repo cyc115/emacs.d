@@ -230,6 +230,11 @@ regardless of whether the current buffer is in `eww-mode'."
 (custom-set-variables '(org-trello-current-prefix-keybinding "C-c x"))
 
 
+;; ----- restclient-org integration -----
+(load-user-file "mike/ob-restclient.el")
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((restclient . t)))
 
 ;; ------------------------- language specific sections below ---------------------------------------
 

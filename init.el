@@ -137,6 +137,9 @@ buffer in current window."
 ;; display time inn the status line
 (display-time-mode 1)
 
+
+;; ------- eww -----------
+
 ;; eww browser open links in separate buffer by default
 ;; Auto-rename new eww buffers, so when running `M-x eww` a new buffer is created
 (defun xah-rename-eww-hook ()
@@ -153,6 +156,9 @@ regardless of whether the current buffer is in `eww-mode'."
         (apply orig-fun args))
     (apply orig-fun args)))
 (advice-add 'eww :around #'modi/force-new-eww-buffer)
+
+;; set google as default search engine
+(setq eww-search-prefix "https://www.google.com/search?q=")
 
 
 ;; open links from eamcs in the emacs embedded w3m browser

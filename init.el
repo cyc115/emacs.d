@@ -52,7 +52,7 @@
 ;; eg. (load-user-file "mike/timer.el")
 (defun load-user-file (file)
   (interactive "f")
-  "Load a file in current user's configuration directory"
+ "Load a file in current user's configuration directory"
   (load-file (expand-file-name file user-init-dir)))
 
 ;; custom setups
@@ -221,26 +221,16 @@ regardless of whether the current buffer is in `eww-mode'."
 (setq org-agenda-cmp-user-defined 'my/user-todo-sort)
 (setq org-agenda-cmp-user-defined 'my/user-todo-sort)
 
+;; orgmode restclient
+(load-user-file "mike/restclient.el")
 
-;; display inline image size
-(setq org-image-actual-width nil)
-
-
-;; org-trello mode
-(require 'org-trello)
-(custom-set-variables
- '(org-trello-files '(
-                      "/Users/yuecchen/Dropbox (Personal)/planning/elearn.org"
-                      )))
-
-(custom-set-variables '(org-trello-current-prefix-keybinding "C-c x"))
-
-
-;; ----- restclient-org integration -----
-(load-user-file "mike/ob-restclient.el")
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((restclient . t)))
+
+
+;; display inline image size
+(setq org-image-actual-width nil)
 
 ;; ------------------------- language specific sections below ---------------------------------------
 
@@ -249,6 +239,12 @@ regardless of whether the current buffer is in `eww-mode'."
 ;; load ruby robocop fmter
 (load-user-file "mike/robocopfmt.el")
 ;; (add-hook 'ruby-mode-hook #'rubocopfmt-mode)
+
+;; ---- js2 mode -----
+
+;; does not warn about missing semicolon
+(setq js2-strict-missing-semi-warning nil)
+(setq js2-missing-semi-one-line-override nil)
 
 ;; ----- wepy -----
 

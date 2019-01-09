@@ -62,7 +62,7 @@
 
 ;; enable mouse scrolling in osx
 (unless window-system
-  (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
+  (global-set-key (kbd "<mouse-4>") 'scroll-down-line) ;
   (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
 
 ;; auto-reload files from filesystem on git checkout branch
@@ -96,6 +96,7 @@
 
 ;; load timer
 (load-user-file "mike/timer.el")
+(load-user-file "mike/restclient.el")
 
 ;; load textmate mode to enhence goto functions see: https://github.com/defunkt/textmate.el
 (load-user-file "mike/textmate.el")
@@ -222,7 +223,7 @@ regardless of whether the current buffer is in `eww-mode'."
 (setq org-agenda-cmp-user-defined 'my/user-todo-sort)
 
 ;; orgmode restclient
-(load-user-file "mike/restclient.el")
+
 
 (org-babel-do-load-languages
  'org-babel-load-languages

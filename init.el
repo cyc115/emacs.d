@@ -115,6 +115,8 @@
 (global-unset-key "\M-c")
 (define-key global-map (kbd "M-c") 'ace-jump-mode)
 
+;; global linum
+(global-display-line-numbers-mode)
 
 ;; Accomodate dropbox
 (setq desktop-base-file-name (concat ".desktop." (system-name)))

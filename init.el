@@ -96,7 +96,13 @@
 
 ;; load timer
 (load-user-file "mike/timer.el")
+
+;; restclient
 (load-user-file "mike/restclient.el")
+(load-user-file "mike/ob-restclient.el")
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((restclient . t)))
 
 ;; load textmate mode to enhence goto functions see: https://github.com/defunkt/textmate.el
 (load-user-file "mike/textmate.el")
@@ -116,7 +122,11 @@
 (define-key global-map (kbd "M-c") 'ace-jump-mode)
 
 ;; global linum
-(global-display-line-numbers-mode)
+(if (version< "26" emacs-version)
+    ;; only in emacs26
+    (global-display-line-numbers-mode)
+  ;; emacs 23 and higher
+  (global-linum-mode 1))
 
 ;; Accomodate dropbox
 (setq desktop-base-file-name (concat ".desktop." (system-name)))
@@ -224,12 +234,6 @@ regardless of whether the current buffer is in `eww-mode'."
 (setq org-agenda-cmp-user-defined 'my/user-todo-sort)
 (setq org-agenda-cmp-user-defined 'my/user-todo-sort)
 
-;; orgmode restclient
-
-
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((restclient . t)))
 
 
 ;; display inline image size

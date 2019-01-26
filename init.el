@@ -213,8 +213,7 @@ regardless of whether the current buffer is in `eww-mode'."
 (defun my/org-archive-done-tasks ()
   (interactive)
   (org-map-entries 'org-archive-subtree "/DONE" 'file)
-  (org-map-entries 'org-archive-subtree "/CANCELLED" 'file)
-  )
+  (org-map-entries 'org-archive-subtree "/CANCELLED" 'file))
 
 
 ;; org-mode sort keywords
@@ -232,7 +231,6 @@ regardless of whether the current buffer is in `eww-mode'."
           ((apply '< cmp) -1)
           (t nil))))
 (setq org-agenda-cmp-user-defined 'my/user-todo-sort)
-(setq org-agenda-cmp-user-defined 'my/user-todo-sort)
 
 
 
@@ -247,14 +245,15 @@ regardless of whether the current buffer is in `eww-mode'."
 (load-user-file "mike/robocopfmt.el")
 ;; (add-hook 'ruby-mode-hook #'rubocopfmt-mode)
 
+;; run test at cursor
+(load-user-file "mike/test_rails.el")
+
 ;; ---- js2 mode -----
 
 ;; does not warn about missing semicolon
 (setq js2-strict-missing-semi-warning nil)
 (setq js2-missing-semi-one-line-override nil)
 
-;; ----- wepy -----
-
-;; minapp development setups
-(setq auto-mode-alist (append '(("\\.wpy$" . vue))
-                              auto-mode-alist))
+;; ----- elisp ------
+;; auto complete
+(add-hook 'emacs-lisp-mode-hook 'ielm-auto-complete)

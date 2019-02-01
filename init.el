@@ -247,6 +247,7 @@ regardless of whether the current buffer is in `eww-mode'."
 
 ;; run test at cursor
 (load-user-file "mike/test_rails.el")
+(global-set-key (kbd "C-c C-c") 'my/rails-test-line-at-cursor)
 
 ;; ---- js2 mode -----
 

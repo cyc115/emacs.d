@@ -249,6 +249,10 @@ regardless of whether the current buffer is in `eww-mode'."
 (load-user-file "mike/test_rails.el")
 (global-set-key (kbd "C-c C-c") 'my/rails-test-line-at-cursor)
 
+;; send line to tmux pane 1
+(load-user-file "mike/send_to_pane1.el")
+(global-set-key (kbd "C-c b") 'my/tmux-send-to-pane-1)
+
 ;; ---- js2 mode -----
 
 ;; does not warn about missing semicolon

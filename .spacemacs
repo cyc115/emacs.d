@@ -31,6 +31,12 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     sql
+     csv
+     python
+     go
+     ruby
+     ruby
      auto-completion
      better-defaults
      emacs-lisp
@@ -40,12 +46,14 @@ values."
      javascript
      markdown
      org
-     ruby-on-rails
+     ruby
      rust
      spell-checking
      syntax-checking
      terraform
+     w3m
      yaml
+     docker
      ;; osx
      ;; python
      ;; version-control
@@ -57,7 +65,14 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(company-tabnine prettier-js restclient)
+   dotspacemacs-additional-packages '(
+                                      company-tabnine
+                                      devdocs
+                                      prettier-js
+                                      restclient
+                                      zoom
+                                      ob-async
+                                      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -312,34 +327,6 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-
-  ;; ----- engine mode search -------
-
-  ;; github search with engine mode
-  (require 'engine-mode)
-  (engine-mode t)
-
-  ;; call engine/search-github to search directly in gh
-  (defengine github
-    "https://github.com/search?ref=simplesearch&q=%s")
-
-  (defengine google
-    "http://www.google.com/search?ie=utf-8&oe=utf-8&q=%s"
-    :keybinding "g")
-
-  (defengine google-maps
-    "http://maps.google.com/maps?q=%s"
-    :docstring "Mappin' it up.")
-
-  (defengine stack-overflow
-    "https://stackoverflow.com/search?q=%s")
-
-  (defengine youtube
-    "http://www.youtube.com/results?aq=f&oq=&search_query=%s")
-
-
-  ;; ------ restclient --------
-  (require 'restclient)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -357,10 +344,10 @@ you should place your code here."
  '(evil-want-Y-yank-to-eol nil)
  '(org-agenda-files
    (quote
-    ("~/Dropbox (Personal)/planning/work_related.org" "~/Dropbox (Personal)/planning/notes.org" "~/Dropbox (Personal)/planning/work.org" "~/Dropbox (Personal)/planning/personal.org")))
+    ("~/Dropbox (Personal)/planning/elearn.org" "~/Dropbox (Personal)/planning/work_related.org" "~/Dropbox (Personal)/planning/notes.org" "~/Dropbox (Personal)/planning/work.org" "~/Dropbox (Personal)/planning/personal.org")))
  '(package-selected-packages
    (quote
-    (company-tabnine xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help idle-highlight-mode toml-mode racer flycheck-rust cargo rust-mode terraform-mode hcl-mode company-anaconda org-alert tea-time switch-window treepy graphql yaml-mode flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck auto-dictionary org-projectile-helm unfill smeargle reveal-in-osx-finder pbcopy osx-trash osx-dictionary orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim magit-gitflow launchctl htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy evil-magit magit magit-popup git-commit ghub with-editor company-web web-completion-data company-tern tern company-statistics company auto-yasnippet ac-ispell auto-complete yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode anaconda-mode pythonic sass-mode web-mode tagedit slim-mode scss-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode vue-mode edit-indirect ssass-mode vue-html-mode web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode mmm-mode markdown-toc markdown-mode gh-md spinner org-plus-contrib evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu undo-tree adaptive-wrap bundler vimrc-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest dactyl-mode chruby inf-ruby ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smartparens restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-search-highlight-persist evil-numbers evil-nerd-commenter evil goto-chg eval-sexp-fu highlight elisp-slime-nav dumb-jump diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup async evil-unimpaired f s dash)))
+    (helm-org-rifle origami ob-async graphql-mode sql-indent devdocs csv-mode go-guru go-eldoc company-go go-mode helm-dash zoom wsd-mode prettier-js dockerfile-mode docker tablist docker-tramp groovy-mode restclient engine-mode org-trello helm-w3m w3m company-tabnine xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help idle-highlight-mode toml-mode racer flycheck-rust cargo rust-mode terraform-mode hcl-mode company-anaconda org-alert tea-time switch-window treepy graphql yaml-mode flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck auto-dictionary org-projectile-helm unfill smeargle reveal-in-osx-finder pbcopy osx-trash osx-dictionary orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim magit-gitflow launchctl htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy evil-magit magit magit-popup git-commit ghub with-editor company-web web-completion-data company-tern tern company-statistics company auto-yasnippet ac-ispell auto-complete yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode anaconda-mode pythonic sass-mode web-mode tagedit slim-mode scss-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode vue-mode edit-indirect ssass-mode vue-html-mode web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode mmm-mode markdown-toc markdown-mode gh-md spinner org-plus-contrib evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu undo-tree adaptive-wrap bundler vimrc-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest dactyl-mode chruby inf-ruby ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smartparens restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-search-highlight-persist evil-numbers evil-nerd-commenter evil goto-chg eval-sexp-fu highlight elisp-slime-nav dumb-jump diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup async evil-unimpaired f s dash)))
  '(safe-local-variable-values
    (quote
     ((rspec-docker-cwd . "/home/bt/")

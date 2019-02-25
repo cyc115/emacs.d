@@ -240,7 +240,19 @@ regardless of whether the current buffer is in `eww-mode'."
           (t nil))))
 (setq org-agenda-cmp-user-defined 'my/user-todo-sort)
 
+;; helm-org-rifle : quickly search through org files
+;; https://github.com/alphapapa/helm-org-rifle
+;; Helm commands: show results in a Helm buffer
+;; helm-org-rifle: Results from all open Org buffers
+;; helm-org-rifle-current-buffer: Show results from current buffer
+;; helm-org-rifle-directories: Show results from selected directories; with prefix, recursively
+;; helm-org-rifle-org-directory: Show results from Org files in org-directory
 
+;; Occur commands: show results in an occur-like, persistent buffer
+;; helm-org-rifle-occur: Show results from all open Org buffers
+;; helm-org-rifle-occur-directories: Show results from selected directories; with prefix, recursively
+;; helm-org-rifle-occur-org-directory: Show results from Org files in org-directory
+(global-set-key (kbd "M-s M-s") 'helm-org-rifle-org-directory)
 
 ;; display inline image size
 (setq org-image-actual-width nil)

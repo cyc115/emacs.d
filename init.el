@@ -102,7 +102,15 @@
 (load-user-file "mike/ob-restclient.el")
 (org-babel-do-load-languages
  'org-babel-load-languages
- '((restclient . t)))
+ '(
+   (restclient . t)
+   (ruby . t)
+   (shell . t)
+   ;; (ditaa . t)
+   ;; (dot . t)
+   ;; (octave . t)
+   ;; (sqlite . t)
+   ))
 
 ;; load textmate mode to enhence goto functions see: https://github.com/defunkt/textmate.el
 (load-user-file "mike/textmate.el")

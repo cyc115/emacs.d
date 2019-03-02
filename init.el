@@ -65,6 +65,10 @@
   (global-set-key (kbd "<mouse-4>") 'scroll-down-line) ;
   (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
 
+;; allow neotree resize
+(setq neo-window-fixed-size nil)
+
+
 ;; auto-reload files from filesystem on git checkout branch
 (global-auto-revert-mode 1)
 (setq auto-revert-check-vc-info t)

@@ -273,12 +273,18 @@ regardless of whether the current buffer is in `eww-mode'."
 (load-user-file "mike/send_to_pane1.el")
 (global-set-key (kbd "C-c b") 'my/tmux-send-to-pane-1)
 
-;; ---- js2 mode -----
+;; ---- web mode -----
 
 ;; does not warn about missing semicolon
 (setq js2-strict-missing-semi-warning nil)
 (setq js2-missing-semi-one-line-override nil)
 
+(defun my-web-mode-hook ()
+  "Hooks for Web mode."
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  )
+(add-hook 'web-mode-hook  'my-web-mode-hook)
 ;; ----- elisp ------
 ;; auto complete
 (add-hook 'emacs-lisp-mode-hook 'ielm-auto-complete)

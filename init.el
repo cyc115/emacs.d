@@ -276,6 +276,8 @@ regardless of whether the current buffer is in `eww-mode'."
 ;; send line to tmux pane 1
 (load-user-file "mike/send_to_pane1.el")
 (global-set-key (kbd "C-c b") 'my/tmux-send-to-pane-1)
+(global-set-key (kbd "C-c k") 'my/tmux-send-C-c-to-pane-1)
+(global-set-key (kbd "C-c d") 'my/tmux-send-C-d-to-pane-1)
 
 ;; ---- web mode -----
 

@@ -18,9 +18,6 @@
 
 (require 'exwm)
 (require 'exwm-config)
-
-
-;; setup multi-window support
 (require 'exwm-randr)
 (setq exwm-randr-workspace-output-plist '(1 "eDP-1" 2 "DP-2"))
 (add-hook 'exwm-randr-screen-change-hook
@@ -28,57 +25,11 @@
             (start-process-shell-command
              "xrandr" nil "xrandr --output eDP-1 --output DP-2 --above eDP-1 --auto")))
 (exwm-randr-enable)
+(exwm-config-default)
 
-
-;; eg. define key binding
-;; https://github.com/ch11ng/exwm/wiki
-(define-key exwm-mode-map [?\C-q] 'exwm-input-release-keyboard)
-
-;; move to pane in window
-;; TODO those bindings are defined with global-set-key so they will not work with xwindow buffers
-(global-set-key (kbd "s-i") 'windmove-up)
-(global-set-key (kbd "s-k") 'windmove-down)
-(global-set-key (kbd "s-j") 'windmove-left)
-(global-set-key (kbd "s-l") 'windmove-right)
-
-
-;; setup backlight support
-;; XXX
-;; (defun my/brightnessUp ()
-;;   (interactive)
-;;   (shell-command
-   
-;;    ))
-;; (defun my/brightnessDown ()
-;;   (interactive)
-;;   (shell-command
-   
-;;    ))
-
-;; (defun my/brightnessUp ()
-;;   (interactive)
-;;   (shell-command
-;;    (s-concat "tmux send-keys -t " (my/_tmux-pane-to-run-rails-test) " '" (my/_rails-test-str) "' Enter" )))
-
-;; (global-set-key (kbd "XF86MonBrightnessDown") 'windmove-up)
-;; (global-set-key (kbd "XF86MonBrightnessUp") 'windmove-up)
-
-
-
-;; ;; system monitor
-;; (require 'symon)
-;; (defcustom symon-monitors
-;;   '(symon-linux-memory-monitor
-;;     symon-linux-cpu-monitor
-;;     symon-linux-network-rx-monitor
-;;     symon-linux-network-tx-monitor)
-;;   )
-;; (symon-sparkline-type "bounded")
 (symon-mode)
 (add-hook 'after-init-hook #'fancy-battery-mode)
 
-
-(exwm-config-default)
 
 ;; ------------------------- from original emacs setup --------------------------------------------------
 
@@ -303,7 +254,13 @@ regardless of whether the current buffer is in `eww-mode'."
 ;; helm-org-rifle-occur: Show results from all open Org buffers
 ;; helm-org-rifle-occur-directories: Show results from selected directories; with prefix, recursively
 ;; helm-org-rifle-occur-org-directory: Show results from Org files in org-directory
-(global-set-key (kbd "M-s M-s") 'helm-org-rifle-org-directory)
+(defun rifle-in-orgs ()
+  "search in predefined $HOME/org"
+  (interactive)
+  (helm-org-rifle-directories "~/org")
+  )
+
+(global-set-key (kbd "M-s M-s") 'rifle-in-orgs)
 
 ;; display inline image size
 (setq org-image-actual-width nil)
@@ -322,6 +279,7 @@ regardless of whether the current buffer is in `eww-mode'."
 
 ;; send line to tmux pane 1
 (load-user-file "mike/send_to_pane1.el")
+
 ;; (global-set-key (kbd "C-c b") 'my/tmux-send-to-pane-1)
 ;; (global-set-key (kbd "C-c k") 'my/tmux-send-C-c-to-pane-1)
 ;; (global-set-key (kbd "C-c d") 'my/tmux-send-C-d-to-pane-1)
@@ -341,3 +299,14 @@ regardless of whether the current buffer is in `eww-mode'."
 ;; ----- elisp ------
 ;; auto complete
 (add-hook 'emacs-lisp-mode-hook 'ielm-auto-complete)
+
+
+;; ------- predefined split window ratio 30/70 --------
+(defun my/split-window-right (&optional arg)
+  "Split the current window 30/70
+A single-digit prefix argument gives the left window size arg*10%."
+  (interactive "P")
+  (let ((proportion (* (or arg 12) 0.1)))
+    (split-window-right (round (* proportion (window-height))))))
+
+(global-set-key (kbd "C-c x 4") 'my/split-window-right)

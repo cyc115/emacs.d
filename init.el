@@ -14,6 +14,72 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
 
+;; ------------------------- emacs windows manager related setups  --------------------------------------------------
+
+(require 'exwm)
+(require 'exwm-config)
+
+
+;; setup multi-window support
+(require 'exwm-randr)
+(setq exwm-randr-workspace-output-plist '(1 "eDP-1" 2 "DP-2"))
+(add-hook 'exwm-randr-screen-change-hook
+          (lambda ()
+            (start-process-shell-command
+             "xrandr" nil "xrandr --output eDP-1 --output DP-2 --above eDP-1 --auto")))
+(exwm-randr-enable)
+
+
+;; eg. define key binding
+;; https://github.com/ch11ng/exwm/wiki
+(define-key exwm-mode-map [?\C-q] 'exwm-input-release-keyboard)
+
+;; move to pane in window
+;; TODO those bindings are defined with global-set-key so they will not work with xwindow buffers
+(global-set-key (kbd "s-i") 'windmove-up)
+(global-set-key (kbd "s-k") 'windmove-down)
+(global-set-key (kbd "s-j") 'windmove-left)
+(global-set-key (kbd "s-l") 'windmove-right)
+
+
+;; setup backlight support
+;; XXX
+;; (defun my/brightnessUp ()
+;;   (interactive)
+;;   (shell-command
+   
+;;    ))
+;; (defun my/brightnessDown ()
+;;   (interactive)
+;;   (shell-command
+   
+;;    ))
+
+;; (defun my/brightnessUp ()
+;;   (interactive)
+;;   (shell-command
+;;    (s-concat "tmux send-keys -t " (my/_tmux-pane-to-run-rails-test) " '" (my/_rails-test-str) "' Enter" )))
+
+;; (global-set-key (kbd "XF86MonBrightnessDown") 'windmove-up)
+;; (global-set-key (kbd "XF86MonBrightnessUp") 'windmove-up)
+
+
+
+;; ;; system monitor
+;; (require 'symon)
+;; (defcustom symon-monitors
+;;   '(symon-linux-memory-monitor
+;;     symon-linux-cpu-monitor
+;;     symon-linux-network-rx-monitor
+;;     symon-linux-network-tx-monitor)
+;;   )
+;; (symon-sparkline-type "bounded")
+(symon-mode)
+(add-hook 'after-init-hook #'fancy-battery-mode)
+
+
+(exwm-config-default)
+
 ;; ------------------------- from original emacs setup --------------------------------------------------
 
 ;; Increase gc-cons-threshold, depending on your system you may set it back to a
@@ -185,25 +251,6 @@ regardless of whether the current buffer is in `eww-mode'."
 ;; set google as default search engine
 (setq eww-search-prefix "https://www.google.com/search?q=")
 
-
-;; open links from eamcs in the emacs embedded w3m browser
-;; (setq browse-url-browser-function  'w3m-goto-url-new-session)
-
-;; (setq
-;;  browse-url-browser-function
-;;  '(
-;;    ("github\\.braintreps.com" . browse-url-default-browser)
-;;    ("braintree" . browse-url-default-browser)
-;;    ("paypal" . browse-url-default-browser)
-;;    ("." . w3m-goto-url-new-session)
-;;    ))
-
-;; (when (fboundp 'w3m)
-;;   (defun w3m-config ()
-;;     (local-set-key (kbd "X") 'w3m-delete-buffer))
-
-;;   (add-hook 'w3m-emacs 'w3m-config))
-
 ;; ---------------------------------- org mode ------------------------------------------------------
 
 ;; set TODO keyword highlights
@@ -271,13 +318,13 @@ regardless of whether the current buffer is in `eww-mode'."
 
 ;; run test at cursor
 (load-user-file "mike/test_rails.el")
-(global-set-key (kbd "C-c C-c") 'my/rails-test-line-at-cursor)
+;; (global-set-key (kbd "C-c C-c") 'my/rails-test-line-at-cursor)
 
 ;; send line to tmux pane 1
 (load-user-file "mike/send_to_pane1.el")
-(global-set-key (kbd "C-c b") 'my/tmux-send-to-pane-1)
-(global-set-key (kbd "C-c k") 'my/tmux-send-C-c-to-pane-1)
-(global-set-key (kbd "C-c d") 'my/tmux-send-C-d-to-pane-1)
+;; (global-set-key (kbd "C-c b") 'my/tmux-send-to-pane-1)
+;; (global-set-key (kbd "C-c k") 'my/tmux-send-C-c-to-pane-1)
+;; (global-set-key (kbd "C-c d") 'my/tmux-send-C-d-to-pane-1)
 
 ;; ---- web mode -----
 

@@ -294,3 +294,14 @@ regardless of whether the current buffer is in `eww-mode'."
 ;; ----- elisp ------
 ;; auto complete
 (add-hook 'emacs-lisp-mode-hook 'ielm-auto-complete)
+
+
+;; ------- predefined split window ratio 30/70 --------
+(defun my/split-window-right (&optional arg)
+  "Split the current window 30/70
+A single-digit prefix argument gives the left window size arg*10%."
+  (interactive "P")
+  (let ((proportion (* (or arg 12) 0.1)))
+    (split-window-right (round (* proportion (window-height))))))
+
+(global-set-key (kbd "C-c x 4") 'my/split-window-right)

@@ -284,7 +284,7 @@ regardless of whether the current buffer is in `eww-mode'."
 (global-set-key (kbd "C-c b") 'my/tmux-send-to-pane-1)
 (global-set-key (kbd "C-c k") 'my/tmux-send-C-c-to-pane-1)
 (global-set-key (kbd "C-c d") 'my/tmux-send-C-d-to-pane-1)
-
+(global-set-key (kbd "C-c s") 'my/tmux-swap-pane-1-with-0)
 ;; ---- web mode -----
 
 ;; does not warn about missing semicolon

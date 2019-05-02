@@ -52,6 +52,7 @@
 ;; eg. (load-user-file "mike/timer.el")
 (defun load-user-file (file)
   (interactive "f")
+
  "Load a file in current user's configuration directory"
   (load-file (expand-file-name file user-init-dir)))
 
@@ -67,6 +68,16 @@
 
 ;; allow neotree resize
 (setq neo-window-fixed-size nil)
+
+
+;; config yas snippet
+(setq yas-snippet-dirs '("~/.emacs.d/mike/snippets/"))
+
+;; enable global snippets
+;; have a fundamental-mode directory alongside whatever other snippet directories
+(add-hook 'yas-minor-mode-hook
+          (lambda ()
+            (yas-activate-extra-mode 'fundamental-mode)))
 
 
 ;; auto-reload files from filesystem on git checkout branch

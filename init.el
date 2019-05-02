@@ -267,7 +267,13 @@ regardless of whether the current buffer is in `eww-mode'."
 ;; helm-org-rifle-occur: Show results from all open Org buffers
 ;; helm-org-rifle-occur-directories: Show results from selected directories; with prefix, recursively
 ;; helm-org-rifle-occur-org-directory: Show results from Org files in org-directory
-(global-set-key (kbd "M-s M-s") 'helm-org-rifle-org-directory)
+(defun rifle-in-orgs ()
+  "search in predefined $HOME/org"
+  (interactive)
+  (helm-org-rifle-directories "~/org")
+  )
+
+(global-set-key (kbd "M-s M-s") 'rifle-in-orgs)
 
 ;; display inline image size
 (setq org-image-actual-width nil)
@@ -289,7 +295,7 @@ regardless of whether the current buffer is in `eww-mode'."
 (global-set-key (kbd "C-c b") 'my/tmux-send-to-pane-1)
 (global-set-key (kbd "C-c k") 'my/tmux-send-C-c-to-pane-1)
 (global-set-key (kbd "C-c d") 'my/tmux-send-C-d-to-pane-1)
-
+(global-set-key (kbd "C-c s") 'my/tmux-swap-pane-1-with-0)
 ;; ---- web mode -----
 
 ;; does not warn about missing semicolon

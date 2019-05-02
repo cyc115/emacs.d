@@ -1,5 +1,12 @@
 ;; here we use C-c b to send cmd to pane 1 and C-c w to send to pane 2
 
+
+(defun my/tmux-swap-pane-1-with-0 ()
+  (interactive)
+  (shell-command "tmux swap-pane -s0 -t1")
+  (shell-command "tmux select-pane -t2")
+  )
+
 (defun my/tmux-send-to-pane-1 ()
   (interactive)
   (shell-command

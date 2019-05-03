@@ -14,6 +14,22 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
 
+;; ------------------------- emacs windows manager related setups  --------------------------------------------------
+(require 'exwm)
+(require 'exwm-config)
+(require 'exwm-randr)
+(setq exwm-randr-workspace-output-plist '(1 "eDP-1" 2 "DP-2"))
+(add-hook 'exwm-randr-screen-change-hook
+          (lambda ()
+            (start-process-shell-command
+             "xrandr" nil "xrandr --output eDP-1 --output DP-2 --above eDP-1 --auto")))
+(exwm-randr-enable)
+(exwm-config-default)
+
+(symon-mode)
+(add-hook 'after-init-hook #'fancy-battery-mode)
+
+
 ;; ------------------------- from original emacs setup --------------------------------------------------
 
 ;; Increase gc-cons-threshold, depending on your system you may set it back to a
@@ -110,10 +126,6 @@
    (restclient . t)
    (ruby . t)
    (shell . t)
-   ;; (ditaa . t)
-   ;; (dot . t)
-   ;; (octave . t)
-   ;; (sqlite . t)
    ))
 
 ;; load textmate mode to enhence goto functions see: https://github.com/defunkt/textmate.el
@@ -184,25 +196,6 @@ regardless of whether the current buffer is in `eww-mode'."
 
 ;; set google as default search engine
 (setq eww-search-prefix "https://www.google.com/search?q=")
-
-
-;; open links from eamcs in the emacs embedded w3m browser
-;; (setq browse-url-browser-function  'w3m-goto-url-new-session)
-
-;; (setq
-;;  browse-url-browser-function
-;;  '(
-;;    ("github\\.braintreps.com" . browse-url-default-browser)
-;;    ("braintree" . browse-url-default-browser)
-;;    ("paypal" . browse-url-default-browser)
-;;    ("." . w3m-goto-url-new-session)
-;;    ))
-
-;; (when (fboundp 'w3m)
-;;   (defun w3m-config ()
-;;     (local-set-key (kbd "X") 'w3m-delete-buffer))
-
-;;   (add-hook 'w3m-emacs 'w3m-config))
 
 ;; ---------------------------------- org mode ------------------------------------------------------
 
@@ -277,14 +270,16 @@ regardless of whether the current buffer is in `eww-mode'."
 
 ;; run test at cursor
 (load-user-file "mike/test_rails.el")
-(global-set-key (kbd "C-c C-c") 'my/rails-test-line-at-cursor)
+;; (global-set-key (kbd "C-c C-c") 'my/rails-test-line-at-cursor)
 
 ;; send line to tmux pane 1
 (load-user-file "mike/send_to_pane1.el")
+
 (global-set-key (kbd "C-c b") 'my/tmux-send-to-pane-1)
 (global-set-key (kbd "C-c k") 'my/tmux-send-C-c-to-pane-1)
 (global-set-key (kbd "C-c d") 'my/tmux-send-C-d-to-pane-1)
 (global-set-key (kbd "C-c s") 'my/tmux-swap-pane-1-with-0)
+
 ;; ---- web mode -----
 
 ;; does not warn about missing semicolon

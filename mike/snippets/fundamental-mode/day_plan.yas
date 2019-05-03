@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: day-plan
+# key: .dp.
+# --
+
+*** [`(format-time-string "%Y-%m-%d %a")`]
+- [ ] $0
+**** what went well
+**** what did not go well
+**** where are places of improvement

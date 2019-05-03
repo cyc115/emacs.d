@@ -25,9 +25,12 @@
              "xrandr" nil "xrandr --output eDP-1 --output DP-2 --above eDP-1 --auto")))
 (exwm-randr-enable)
 (exwm-config-default)
+(define-key exwm-mode-map [?\C-q] 'exwm-input-release-keyboard)
+
 
 (symon-mode)
 (add-hook 'after-init-hook #'fancy-battery-mode)
+
 
 
 ;; ------------------------- from original emacs setup --------------------------------------------------

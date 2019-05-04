@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: org-time
+# key: .tt.
+# --
+
+[`(format-time-string "%r")`]$0

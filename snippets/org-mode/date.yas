@@ -2,4 +2,5 @@
 # name: date
 # key: .dd.
 # --
+
 [`(format-time-string "%Y-%m-%d %a %R")`]$0

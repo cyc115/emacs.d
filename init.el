@@ -251,6 +251,14 @@ regardless of whether the current buffer is in `eww-mode'."
           (t nil))))
 (setq org-agenda-cmp-user-defined 'my/user-todo-sort)
 
+;; capture template
+(setq org-capture-templates '(("w" "Work [inbox]" entry
+                               (file+headline "~/org/inbox.org" "Work")
+                               "* TODO %i%? \n %U")
+                              ("p" "Personal [inbox]" entry
+                               (file+headline "~/org/inbox.org" "Personal")
+                               "* TODO %i%? \n %U")))
+
 ;; helm-org-rifle : quickly search through org files
 ;; https://github.com/alphapapa/helm-org-rifle
 ;; Helm commands: show results in a Helm buffer

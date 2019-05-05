@@ -257,7 +257,18 @@ regardless of whether the current buffer is in `eww-mode'."
                                "* TODO %i%? \n %U")
                               ("p" "Personal [inbox]" entry
                                (file+headline "~/org/inbox.org" "Personal")
-                               "* TODO %i%? \n %U")))
+                               "* TODO %i%? \n %U")
+                              ("k" "PWK lab todo" entry
+                               (file+headline "~/org/pwk_course/exploit.org" "5")
+                               "* TODO %i%? \n %U")
+                              ("n" "PWK lab notes" entry
+                               (file+headline "~/org/pwk_course/exploit.org" "5")
+                               "* NOTE %i%? \n %U")
+                              ("f" "PWK lab flags [inbox]" entry
+                               (file+headline "~/org/pwk_course/exploit.org" "5")
+                               "* NOTE %i%? :FLAG:\n %U")
+                              ) )
+(global-set-key (kbd "M-q ") 'org-capture)
 
 ;; helm-org-rifle : quickly search through org files
 ;; https://github.com/alphapapa/helm-org-rifle

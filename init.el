@@ -90,13 +90,20 @@
 
 
 ;; config yas snippet
-(setq yas-snippet-dirs '("~/.emacs.d/mike/snippets/"))
+(setq yas-snippet-dirs '("~/.emacs.d/snippets/"))
 
 ;; enable global snippets
 ;; have a fundamental-mode directory alongside whatever other snippet directories
 (add-hook 'yas-minor-mode-hook
           (lambda ()
             (yas-activate-extra-mode 'fundamental-mode)))
+
+(add-hook 'yas-minor-mode-hook
+          (lambda ()
+            (global-set-key (kbd "TAB") 'yas-expand))
+          )
+
+
 
 
 ;; auto-reload files from filesystem on git checkout branch
@@ -269,6 +276,32 @@ regardless of whether the current buffer is in `eww-mode'."
                                "* NOTE %i%? :FLAG:\n %U")
                               ) )
 (global-set-key (kbd "M-q ") 'org-capture)
+
+
+;; org custom agenda views
+(setq org-agenda-custom-commands
+      '(
+        ("k" "pwk lab relate tasks"
+         ((agenda "")
+          (tags-todo "pwk")
+          ))
+        ("w" "Agenda and work related"
+         ((agenda "")
+          (tags-todo "work")
+          ))
+        ("p" "Agenda and personal related tasks"
+         ((agenda "")
+          (tags-todo "personal")
+          ))
+        ("d" "daily and review"
+         (
+          (tags-todo "inbox")
+          ;; TODO overdue
+          ;; TODO inbox
+          ;; TODO scheduled today for work
+          ;; TODO scheduled today for personal
+          ))
+        ))
 
 ;; helm-org-rifle : quickly search through org files
 ;; https://github.com/alphapapa/helm-org-rifle

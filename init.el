@@ -282,7 +282,7 @@ regardless of whether the current buffer is in `eww-mode'."
 (setq org-agenda-custom-commands
       '(
         ("k" "pwk lab relate tasks"
-         ((agenda "")
+         (
           (tags-todo "pwk")
           ))
         ("w" "Agenda and work related"
@@ -300,6 +300,11 @@ regardless of whether the current buffer is in `eww-mode'."
           ;; TODO inbox
           ;; TODO scheduled today for work
           ;; TODO scheduled today for personal
+          ))
+        ("t" "test"
+         ((agenda "")
+          (tags-todo "work")
+          (todo "IDEA")
           ))
         ))
 

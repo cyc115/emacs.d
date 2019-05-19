@@ -28,10 +28,14 @@
 (define-key exwm-mode-map [?\C-q] 'exwm-input-release-keyboard)
 
 
+(defun exwm-logout ()
+  (interactive)
+  (recentf-save-list)
+  (save-some-buffers)
+  (start-process-shell-command "logout" nil "lxsession-logout"))
+
 (symon-mode)
 (add-hook 'after-init-hook #'fancy-battery-mode)
-
-
 
 ;; ------------------------- from original emacs setup --------------------------------------------------
 
@@ -102,7 +106,6 @@
           (lambda ()
             (global-set-key (kbd "TAB") 'yas-expand))
           )
-
 
 
 
@@ -240,6 +243,10 @@ regardless of whether the current buffer is in `eww-mode'."
   (interactive)
   (org-map-entries 'org-archive-subtree "/DONE" 'file)
   (org-map-entries 'org-archive-subtree "/CANCELLED" 'file))
+
+;; take screenshot from emacs on kali
+(load-user-file "mike/kali-screenshot.el")
+(global-set-key (kbd "C-c SPC ") 'my/org-screenshot-kali)
 
 
 ;; org-mode sort keywords

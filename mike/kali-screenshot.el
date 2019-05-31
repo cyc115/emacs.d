@@ -5,3 +5,8 @@
   (interactive)
   (shell-command "~/.emacs.d/mike/_kali-screenshot.sh")
   )
+
+(defun my/org-screenshot-clipboard ()
+  (interactive)
+  (shell-command "gnome-screenshot -a -c")
+  )

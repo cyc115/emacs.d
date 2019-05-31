@@ -45,13 +45,23 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
-				                              company         ;; auto completion
+				      company         ;; auto completion
+				      exwm
                                       company-tabnine ;; auto completion
-                                      exwm            ;; emacs windows manager
                                       helm-org-rifle
                                       restclient
                                       symon ;; system monitor
                                       zoom
+                                      ;; org-plus-contrib
+                                      org-present
+                                      org-projectile
+                                      orgit
+                                      interleave
+                                      org-noter
+                                      pdf-tools ;; for reading pdfs
+                                      ;; golden-ratio automatically resizes the windows you are working on
+                                      ;; (require 'golden-ratio) (golden-ratio-mode 1)
+                                      golden-ratio
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -316,11 +326,12 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(evil-want-Y-yank-to-eol nil)
- '(org-agenda-files (quote ("~/Dropbox/planning/personal.org")))
+ '(org-agenda-files
+   (quote
+    ("~/org/personal.org" "~/org/inbox.org" "~/org/pwk_course/pwk.org" "~/org/pwk_course/lab.org" "~/org/pwk_course/global_todos.org" "~/org/pwk_course/exploit.org" "~/org/pentest-tools.org" "~/org/work.org")))
  '(package-selected-packages
    (quote
-    (unfill smeargle rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restclient rbenv rake orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim minitest magit-gitflow magit-popup htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy evil-magit transient git-commit with-editor company-statistics chruby bundler inf-ruby auto-yasnippet yasnippet ac-ispell auto-complete symon zoom magit helm-org-rifle xelb mmm-mode markdown-toc markdown-mode gh-md exwm company-tabnine ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
+    (org-noter pdf-tools interleave deft org-projectile unfill smeargle rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restclient rbenv rake orgit org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim mmm-mode minitest markdown-toc markdown-mode magit-gitflow magit-popup htmlize helm-org-rifle helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy evil-magit magit transient git-commit with-editor company-statistics chruby bundler inf-ruby auto-yasnippet yasnippet ac-ispell auto-complete zoom company-tabnine ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async symon exwm))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -19,10 +19,17 @@
 (require 'exwm-config)
 (require 'exwm-randr)
 (setq exwm-randr-workspace-output-plist '(1 "eDP-1" 2 "DP-2"))
+
 (add-hook 'exwm-randr-screen-change-hook
           (lambda ()
             (start-process-shell-command
-             "xrandr" nil "xrandr --output eDP-1 --output DP-2 --above eDP-1 --auto")))
+             ;; top-bottom
+             ;; "xrandr" nil "xrandr --output eDP-1 --output DP-2 --above eDP-1 --auto"
+
+             ;; left-right
+             "xrandr" nil "xrandr --output eDP-1 --output DP-2 --right-of eDP-1 --primary --auto"
+             )))
+
 (exwm-randr-enable)
 (exwm-config-default)
 (define-key exwm-mode-map [?\C-q] 'exwm-input-release-keyboard)
@@ -61,6 +68,13 @@
   (unless (server-running-p) (server-start)))
 
 ;; ------------------------- tools / libraries / custom setups ------------------------------------------
+
+(defun frame-bck()
+(interactive)
+(other-window -1))
+
+(define-key (current-global-map) (kbd "C-x [") 'other-window)
+(define-key (current-global-map) (kbd "C-x ]") 'frame-bck)
 
 ;; load-user-file
 ;; load a custom .el lib from ~/.emacs.d/ directory
@@ -247,6 +261,7 @@ regardless of whether the current buffer is in `eww-mode'."
 ;; take screenshot from emacs on kali
 (load-user-file "mike/kali-screenshot.el")
 (global-set-key (kbd "C-c SPC ") 'my/org-screenshot-kali)
+(global-set-key (kbd "C-c ] ") 'my/screenshot-clipboard)
 
 
 ;; org-mode sort keywords
@@ -384,3 +399,4 @@ A single-digit prefix argument gives the left window size arg*10%."
     (split-window-right (round (* proportion (window-height))))))
 
 (global-set-key (kbd "C-c x 4") 'my/split-window-right)
+(put 'narrow-to-page 'disabled nil)

@@ -36,7 +36,7 @@
 (global-set-key (kbd "C-c d") 'my/tmux-send-C-d-to-pane-1)
 
 
-(defun my/send-selection-1 ()
+(defun my/tmux-send-selection-1 ()
   "show content of current region"
   (interactive)
   (let (pos1 pos2 bds)
@@ -52,7 +52,7 @@
     ))
 
 
-(defun my/send-selection-2 ()
+(defun my/tmux-send-selection-2 ()
   "show content of current region"
   (interactive)
   (let (pos1 pos2 bds)
@@ -66,4 +66,10 @@
     (shell-command
      (s-concat "tmux send-keys -t 2 '" (buffer-substring pos1 pos2) "'" ))
     ))
+
+
+(defun my/tmux-toggle-full-pane ()
+  "show content of current region"
+  (interactive)
+  (shell-command "tmux sned-keys -t 1 tmux resize-pane -Z" ))
 

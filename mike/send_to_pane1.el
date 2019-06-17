@@ -35,13 +35,7 @@
    (s-concat "tmux send-keys -t 2 '" (thing-at-point 'line t) "'" ))
   )
 
-(global-set-key (kbd "C-c b") 'my/tmux-send-to-pane-1)
-(global-set-key (kbd "C-c w") 'my/tmux-send-to-pane-2)
-(global-set-key (kbd "C-c k") 'my/tmux-send-C-c-to-pane-1)
-(global-set-key (kbd "C-c d") 'my/tmux-send-C-d-to-pane-1)
-
-
-(defun my/send-selection-1 ()
+(defun my/tmux-send-selection-1 ()
   "show content of current region"
   (interactive)
   (let (pos1 pos2 bds)
@@ -57,7 +51,7 @@
     ))
 
 
-(defun my/send-selection-2 ()
+(defun my/tmux-send-selection-2 ()
   "show content of current region"
   (interactive)
   (let (pos1 pos2 bds)
@@ -71,4 +65,11 @@
     (silent-command
      (s-concat "tmux send-keys -t 2 '" (buffer-substring pos1 pos2) "'" ))
     ))
+
+(global-set-key (kbd "C-c b") 'my/tmux-send-to-pane-1)
+(global-set-key (kbd "C-c w") 'my/tmux-send-to-pane-2)
+(global-set-key (kbd "C-c B") 'my/tmux-send-selection-1)
+(global-set-key (kbd "C-c W") 'my/tmux-send-selection-2)
+(global-set-key (kbd "C-c k") 'my/tmux-send-C-c-to-pane-1)
+(global-set-key (kbd "C-c d") 'my/tmux-send-C-d-to-pane-1)
 

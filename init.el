@@ -73,8 +73,8 @@
 (interactive)
 (other-window -1))
 
-(define-key (current-global-map) (kbd "C-x [") 'other-window)
-(define-key (current-global-map) (kbd "C-x ]") 'frame-bck)
+(define-key (current-global-map) (kbd "C-x ]") 'other-window)
+(define-key (current-global-map) (kbd "C-x [") 'frame-bck)
 
 ;; load-user-file
 ;; load a custom .el lib from ~/.emacs.d/ directory
@@ -287,8 +287,8 @@ regardless of whether the current buffer is in `eww-mode'."
                               ("p" "Personal [inbox]" entry
                                (file+headline "~/org/inbox.org" "Personal")
                                "* TODO %i%? \n %U")
-                              ("k" "PWK lab todo" entry
-                               (file+headline "~/org/pwk_course/exploit.org" "5")
+                              ("k" "PWK / htb lab todo" entry
+                               (file+headline "~/org/hackthebox/friendzone/friendzone.org" "TODOs")
                                "* TODO %i%? \n %U")
                               ("n" "PWK lab notes" entry
                                (file+headline "~/org/pwk_course/exploit.org" "5")
@@ -367,11 +367,6 @@ regardless of whether the current buffer is in `eww-mode'."
 
 ;; send line to tmux pane 1
 (load-user-file "mike/send_to_pane1.el")
-
-(global-set-key (kbd "C-c b") 'my/tmux-send-to-pane-1)
-(global-set-key (kbd "C-c k") 'my/tmux-send-C-c-to-pane-1)
-(global-set-key (kbd "C-c d") 'my/tmux-send-C-d-to-pane-1)
-(global-set-key (kbd "C-c s") 'my/tmux-swap-pane-1-with-0)
 
 ;; ---- web mode -----
 

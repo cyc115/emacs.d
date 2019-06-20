@@ -93,7 +93,7 @@ values."
    ;; (default t)
    dotspacemacs-elpa-https t
    ;; Maximum allowed time in seconds to contact an ELPA repository.
-   dotspacemacs-elpa-timeout 5
+   dotspacemacs-elpa-timeout 30
    ;; If non nil then spacemacs will check for updates at startup
    ;; when the current branch is not `develop'. Note that checking for
    ;; new versions works via git commands, thus it calls GitHub services
@@ -329,9 +329,35 @@ you should place your code here."
  '(org-agenda-files
    (quote
     ("~/org/personal.org" "~/org/inbox.org" "~/org/pwk_course/pwk.org" "~/org/pwk_course/lab.org" "~/org/pwk_course/global_todos.org" "~/org/pwk_course/exploit.org" "~/org/pentest-tools.org" "~/org/work.org")))
+ '(org-capture-templates
+   (quote
+    (("d" "dream [ bucketlist - things I want to do eventually] " entry
+      (file "~/org/bucketlist.org")
+      "* TODO %i%? 
+ %U")
+     ("w" "Work [inbox]" entry
+      (file+headline "~/org/inbox.org" "Work")
+      "* TODO %i%? 
+ %U")
+     ("p" "Personal [inbox]" entry
+      (file+headline "~/org/inbox.org" "Personal")
+      "* TODO %i%? 
+ %U")
+     ("k" "PWK lab todo" entry
+      (file+headline "~/org/pwk_course/exploit.org" "10")
+      "* TODO %i%? 
+ %U")
+     ("n" "PWK lab notes" entry
+      (file+headline "~/org/pwk_course/exploit.org" "10")
+      "* NOTE %i%? 
+ %U")
+     ("f" "PWK lab flags [inbox]" entry
+      (file+headline "~/org/pwk_course/exploit.org" "10")
+      "* NOTE %i%? :FLAG:
+ %U"))))
  '(package-selected-packages
    (quote
-    (org-noter pdf-tools interleave deft org-projectile unfill smeargle rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restclient rbenv rake orgit org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim mmm-mode minitest markdown-toc markdown-mode magit-gitflow magit-popup htmlize helm-org-rifle helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy evil-magit magit transient git-commit with-editor company-statistics chruby bundler inf-ruby auto-yasnippet yasnippet ac-ispell auto-complete zoom company-tabnine ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async symon exwm))))
+    (org-projectile-helm org-noter pdf-tools interleave deft org-projectile unfill smeargle rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restclient rbenv rake orgit org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim mmm-mode minitest markdown-toc markdown-mode magit-gitflow magit-popup htmlize helm-org-rifle helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy evil-magit magit transient git-commit with-editor company-statistics chruby bundler inf-ruby auto-yasnippet yasnippet ac-ispell auto-complete zoom company-tabnine ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async symon exwm))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

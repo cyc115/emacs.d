@@ -1,0 +1,7 @@
+alias gcm git commit -m $*
+alias gc git commit $*
+alias ga git add $*
+alias gst git status
+alias emacs find-file $1
+alias ll ls -l $*
+alias open for i in ${eshell-flatten-list $*} {find-file $i}

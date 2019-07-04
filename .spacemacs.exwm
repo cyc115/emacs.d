@@ -31,14 +31,20 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     yaml
+     javascript
+     html
+     (typescript :variables typescript-fmt-on-save t)
      auto-completion
      better-defaults
      emacs-lisp
      git
-     helm
+     ivy
+     ;; helm
      markdown
      org
      ruby
+     ruby-on-rails
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -47,12 +53,13 @@ values."
    dotspacemacs-additional-packages '(
 				      company         ;; auto completion
 				      exwm
+              yarn-mode
                                       company-tabnine ;; auto completion
                                       helm-org-rifle
                                       restclient
                                       symon ;; system monitor
                                       zoom
-                                      ;; org-plus-contrib
+                                      org-plus-contrib
                                       org-present
                                       org-projectile
                                       orgit
@@ -66,7 +73,7 @@ values."
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(org-projectile)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
@@ -111,7 +118,7 @@ values."
    ;; (default 'vim)
    dotspacemacs-editing-style 'emacs
    ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
-   dotspacemacs-verbose-loading nil
+   dotspacemacs-verbose-loading t
    ;; Specify the startup banner. Default value is `official', it displays
    ;; the official spacemacs logo. An integer value is the index of text
    ;; banner, `random' chooses a random text banner in `core/banners'
@@ -199,10 +206,10 @@ values."
    ;; Maximum number of rollback slots to keep in the cache. (default 5)
    dotspacemacs-max-rollback-slots 5
    ;; If non nil, `helm' will try to minimize the space it uses. (default nil)
-   dotspacemacs-helm-resize nil
+   dotspacemacs-helm-resize t
    ;; if non nil, the helm header is hidden when there is only one source.
    ;; (default nil)
-   dotspacemacs-helm-no-header nil
+   dotspacemacs-helm-no-header t
    ;; define the position to display `helm', options are `bottom', `top',
    ;; `left', or `right'. (default 'bottom)
    dotspacemacs-helm-position 'bottom
@@ -326,6 +333,61 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(exwm-input-global-keys
+   (quote
+    (([8388722]
+      . exwm-reset)
+     ([8388727]
+      . exwm-workspace-switch)
+     ([8388646]
+      lambda
+      (command)
+      (interactive
+       (list
+        (read-shell-command "$ ")))
+      (start-process-shell-command command nil command))
+     ([8388656]
+      lambda nil
+      (interactive)
+      (exwm-workspace-switch-create 0))
+     ([8388657]
+      lambda nil
+      (interactive)
+      (exwm-workspace-switch-create 1))
+     ([8388658]
+      lambda nil
+      (interactive)
+      (exwm-workspace-switch-create 2))
+     ([8388659]
+      lambda nil
+      (interactive)
+      (exwm-workspace-switch-create 3))
+     ([8388660]
+      lambda nil
+      (interactive)
+      (exwm-workspace-switch-create 4))
+     ([8388661]
+      lambda nil
+      (interactive)
+      (exwm-workspace-switch-create 5))
+     ([8388662]
+      lambda nil
+      (interactive)
+      (exwm-workspace-switch-create 6))
+     ([8388663]
+      lambda nil
+      (interactive)
+      (exwm-workspace-switch-create 7))
+     ([8388664]
+      lambda nil
+      (interactive)
+      (exwm-workspace-switch-create 8))
+     ([8388665]
+      lambda nil
+      (interactive)
+      (exwm-workspace-switch-create 9))
+     ([134217837]
+      . ignore))))
  '(org-agenda-files
    (quote
     ("~/org/personal.org" "~/org/inbox.org" "~/org/pwk_course/pwk.org" "~/org/pwk_course/lab.org" "~/org/pwk_course/global_todos.org" "~/org/pwk_course/exploit.org" "~/org/pentest-tools.org" "~/org/work.org")))
@@ -336,7 +398,7 @@ you should place your code here."
       "* TODO %i%? 
  %U")
      ("w" "Work [inbox]" entry
-      (file+headline "~/org/inbox.org" "Work")
+      (file+headline "~/org/work.org" "Work")
       "* TODO %i%? 
  %U")
      ("p" "Personal [inbox]" entry
@@ -357,7 +419,7 @@ you should place your code here."
  %U"))))
  '(package-selected-packages
    (quote
-    (org-projectile-helm org-noter pdf-tools interleave deft org-projectile unfill smeargle rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restclient rbenv rake orgit org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim mmm-mode minitest markdown-toc markdown-mode magit-gitflow magit-popup htmlize helm-org-rifle helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy evil-magit magit transient git-commit with-editor company-statistics chruby bundler inf-ruby auto-yasnippet yasnippet ac-ispell auto-complete zoom company-tabnine ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async symon exwm))))
+    (tidal projectile-rails inflections feature-mode yaml-mode ivy-hydra counsel-projectile counsel swiper wgrep smex ivy ng2-mode yarn-mode web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data tide typescript-mode flycheck other-frame-window org-projectile-helm org-noter pdf-tools interleave deft org-projectile unfill smeargle rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restclient rbenv rake orgit org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim mmm-mode minitest markdown-toc markdown-mode magit-gitflow magit-popup htmlize helm-org-rifle helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy evil-magit magit transient git-commit with-editor company-statistics chruby bundler inf-ruby auto-yasnippet yasnippet ac-ispell auto-complete zoom company-tabnine ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async symon exwm))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -34,7 +34,6 @@
 (exwm-config-default)
 (define-key exwm-mode-map [?\C-q] 'exwm-input-release-keyboard)
 
-
 (defun exwm-logout ()
   (interactive)
   (recentf-save-list)
@@ -75,6 +74,7 @@
 
 (define-key (current-global-map) (kbd "C-x ]") 'other-window)
 (define-key (current-global-map) (kbd "C-x [") 'frame-bck)
+(define-key (current-global-map) (kbd "C-x p") 'frame-bck)
 
 ;; load-user-file
 ;; load a custom .el lib from ~/.emacs.d/ directory
@@ -196,8 +196,7 @@
 
 ;; create dedicated window with c-c t
 (defun toggle-window-dedicated ()
-  "Control whether or not Emacs is allowed to display another
-buffer in current window."
+  "Control whether or not Emacs is allowed to display another buffer in current window."
   (interactive)
   (message
    (if (let (window (get-buffer-window (current-buffer)))
@@ -206,7 +205,7 @@ buffer in current window."
      "%s is up for grabs.")
    (current-buffer)))
 
-;; make buffer sticky
+;; make buffer sticky -- prevent another window open in the same buffer
 (global-set-key (kbd "C-c t") 'toggle-window-dedicated)
 
 ;; display time inn the status line
@@ -367,6 +366,7 @@ regardless of whether the current buffer is in `eww-mode'."
 
 ;; send line to tmux pane 1
 (load-user-file "mike/send_to_pane1.el")
+
 
 ;; ---- web mode -----
 

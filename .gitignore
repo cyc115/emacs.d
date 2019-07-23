@@ -11,7 +11,6 @@ eproject.lst
 eshell/history
 .emacs.desktop
 .emacs.desktop.lock
-eshell/alias
 eshell/lastdir
 /url/cookies
 my-org/

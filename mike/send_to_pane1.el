@@ -1,14 +1,22 @@
 ;; here we use C-c b to send cmd to pane 1 and C-c w to send to pane 2
 
 (defun silent-command (cmd)
+  (message cmd)
   (call-process-shell-command
    cmd
    nil "*Shell Command Output*" t
    ))
 
+;; (defun silent-command (cmd)
+;;   (message cmd)
+;;   (shell-command     cmd   )
+;;   )
+
 (defun my/tmux-send-key (cmd)
+
+  (interactive)
   (silent-command
-   (s-concat "tmux send-keys '" cmd "'" ))
+   (s-concat "tmux send-keys " cmd ))
   )
 
 (defun my/tmux-swap-pane-1-with-0 ()

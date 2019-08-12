@@ -43,7 +43,7 @@
 (symon-mode)
 (add-hook 'after-init-hook #'fancy-battery-mode)
 
-;; ------------------------- from original emacs setup --------------------------------------------------
+;; ------------------------- original spacemacs setup --------------------------------------------------
 
 ;; Increase gc-cons-threshold, depending on your system you may set it back to a
 ;; lower value in your dotfile (function `dotspacemacs/user-config')
@@ -74,7 +74,7 @@
 
 (define-key (current-global-map) (kbd "C-x ]") 'other-window)
 (define-key (current-global-map) (kbd "C-x [") 'frame-bck)
-(define-key (current-global-map) (kbd "C-x p") 'frame-bck)
+;; (define-key (current-global-map) (kbd "C-x p") 'frame-bck)
 
 ;; load-user-file
 ;; load a custom .el lib from ~/.emacs.d/ directory
@@ -89,9 +89,9 @@
 ;; eg. (load-user-file "mike/timer.el")
 (defun load-user-file (file)
   (interactive "f")
-
  "Load a file in current user's configuration directory"
-  (load-file (expand-file-name file user-init-dir)))
+ (load-file (expand-file-name file user-init-dir)))
+
 
 ;; custom setups
 (set-default 'truncate-line t)
@@ -106,7 +106,15 @@
 ;; allow neotree resize
 (setq neo-window-fixed-size nil)
 
+;; global linum
+(if (version< "26" emacs-version)
+    (global-display-line-numbers-mode)
+  (global-linum-mode 1))
 
+;; display time inn the status line
+(display-time-mode 1)
+
+;; --------------------- yas snippet ----------------------------
 ;; config yas snippet
 (setq yas-snippet-dirs '("~/.emacs.d/snippets/"))
 
@@ -121,18 +129,22 @@
             (global-set-key (kbd "TAB") 'yas-expand))
           )
 
-
-
+;; --------------------------- global revert-mode / projectile ---------------------------------
 ;; auto-reload files from filesystem on git checkout branch
-(global-auto-revert-mode 1)
+;; (global-auto-revert-mode 1)
 (setq auto-revert-check-vc-info t)
+;; Accomodate dropbox(each machine has its own desktop file)
+(setq desktop-base-file-name (concat ".desktop." (system-name)))
+
 
 ;; projectile mode setup
 (projectile-mode +1)
 
+;; ------------------------ auto-completion -----------------------
+
 ;; tab-nine autocomplete
-(use-package company-tabnine :ensure t)
-(add-to-list 'company-backends #'company-tabnine)
+;; (use-package company-tabnine :ensure t)
+;; (add-to-list 'company-backends #'company-tabnine)
 
 ;; company mode setup
 (setq company-idle-delay 0)
@@ -152,19 +164,22 @@
       '("a" "s" "d" "f" "j" "k" "l" ";" "w" "e" "i" "o"))
 (setq switch-window-shortcut-appearance 'asciiart)
 
-;; load timer
-(load-user-file "mike/timer.el")
 
-;; restclient
+;; ------------------- load custom libraries ----------------------
+(load-user-file "mike/timer.el")
 (load-user-file "mike/restclient.el")
 (load-user-file "mike/ob-restclient.el")
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '(
-   (restclient . t)
-   (ruby . t)
-   (shell . t)
-   ))
+(load-user-file "mike/custom-org-functions.el")
+(load-user-file "mike/custom-eww-functions.el")
+(load-user-file "mike/kali-screenshot.el")
+(load-user-file "mike/toggle-window-dedicated.el")
+
+;; take screenshot from emacs on kali
+(global-set-key (kbd "C-c SPC ") 'my/org-screenshot-kali)
+(global-set-key (kbd "C-c ] ") 'my/screenshot-clipboard)
+
+;; make buffer sticky -- prevent another window open in the same buffer
+(global-set-key (kbd "C-c t") 'toggle-window-dedicated)
 
 ;; load textmate mode to enhence goto functions see: https://github.com/defunkt/textmate.el
 (load-user-file "mike/textmate.el")
@@ -174,6 +189,7 @@
 (global-set-key (kbd "M-]") 'textmate-goto-symbol)
 
 ;; load ace-jump
+;; use [M-c + leading character] to jump to character
 (load-user-file "mike/ace-jump.el")
 (autoload
   'ace-jump-mode
@@ -182,103 +198,7 @@
   t)
 (define-key global-map (kbd "M-c") 'ace-jump-mode)
 
-;; global linum
-(if (version< "26" emacs-version)
-    ;; only in emacs26
-    (global-display-line-numbers-mode)
-  ;; emacs 23 and higher
-  (global-linum-mode 1))
-
-;; Accomodate dropbox
-(setq desktop-base-file-name (concat ".desktop." (system-name)))
-
-
-;; create dedicated window with c-c t
-(defun toggle-window-dedicated ()
-  "Control whether or not Emacs is allowed to display another buffer in current window."
-  (interactive)
-  (message
-   (if (let (window (get-buffer-window (current-buffer)))
-         (set-window-dedicated-p window (not (window-dedicated-p window))))
-       "%s: Can't touch this!"
-     "%s is up for grabs.")
-   (current-buffer)))
-
-;; make buffer sticky -- prevent another window open in the same buffer
-(global-set-key (kbd "C-c t") 'toggle-window-dedicated)
-
-;; display time inn the status line
-(display-time-mode 1)
-
-
-;; ------- eww -----------
-
-;; eww browser open links in separate buffer by default
-;; Auto-rename new eww buffers, so when running `M-x eww` a new buffer is created
-(defun xah-rename-eww-hook ()
-  "Rename eww browser's buffer so sites open in new page."
-  (rename-buffer "eww" t))
-(add-hook 'eww-mode-hook #'xah-rename-eww-hook)
-
-;; C-u M-x eww will force a new eww buffer
-(defun modi/force-new-eww-buffer (orig-fun &rest args)
-  "When prefix argument is used, a new eww buffer will be created,
-regardless of whether the current buffer is in `eww-mode'."
-  (if current-prefix-arg
-      (with-temp-buffer
-        (apply orig-fun args))
-    (apply orig-fun args)))
-(advice-add 'eww :around #'modi/force-new-eww-buffer)
-
-;; set google as default search engine
-(setq eww-search-prefix "https://www.google.com/search?q=")
-
-;; ---------------------------------- org mode ------------------------------------------------------
-
-;; set TODO keyword highlights
-(setq org-todo-keywords
-      '((sequence "IDEA" "TODO" "WIP" "PAUSED" "|" "DONE" "CANCELLED" "NOTE"  )))
-
-(setq org-todo-keyword-faces
-      '(
-        ("IDEA" . (:foreground "pink" :weight bold))
-        ("WIP" . (:foreground "blue" :weight bold))
-        ("CANCELLED" . (:foreground "green" :weight bold))
-        ("PAUSED" . (:foreground "yellow" :weight bold))
-        ))
-
-(setq org-startup-indented t)
-
-
-;; org-mode archive-done-tasks
-(defun my/org-archive-done-tasks ()
-  (interactive)
-  (org-map-entries 'org-archive-subtree "/DONE" 'file)
-  (org-map-entries 'org-archive-subtree "/CANCELLED" 'file))
-
-;; take screenshot from emacs on kali
-(load-user-file "mike/kali-screenshot.el")
-(global-set-key (kbd "C-c SPC ") 'my/org-screenshot-kali)
-(global-set-key (kbd "C-c ] ") 'my/screenshot-clipboard)
-
-
-;; org-mode sort keywords
-(setq org-todo-sort-order '( "CANCELLED" "DONE" "NOTE" "PAUSED" "IDEA" "TODO" "WIP"))
-
-(defun my/user-todo-sort (a b)
-  "Sort todo based on which I want to see first"
-  (when-let ((state-a (get-text-property 14 'todo-state a))
-             (state-b (get-text-property 14 'todo-state b))
-             (cmp (--map (cl-position-if (lambda (x)
-                                           (equal x it))
-                                         org-todo-sort-order)
-                         (list state-a state-b))))
-    (cond ((apply '> cmp) 1)
-          ((apply '< cmp) -1)
-          (t nil))))
-(setq org-agenda-cmp-user-defined 'my/user-todo-sort)
-
-;; capture template
+;; ---------------------------------- org capture templates ------------------------------------------------------
 (setq org-capture-templates '(("w" "Work [inbox]" entry
                                (file+headline "~/org/inbox.org" "Work")
                                "* TODO %i%? \n %U")
@@ -296,60 +216,6 @@ regardless of whether the current buffer is in `eww-mode'."
                                "* NOTE %i%? :FLAG:\n %U")
                               ) )
 (global-set-key (kbd "M-q ") 'org-capture)
-
-
-;; org custom agenda views
-(setq org-agenda-custom-commands
-      '(
-        ("k" "pwk lab relate tasks"
-         (
-          (tags-todo "pwk")
-          ))
-        ("w" "Agenda and work related"
-         ((agenda "")
-          (tags-todo "work")
-          ))
-        ("p" "Agenda and personal related tasks"
-         ((agenda "")
-          (tags-todo "personal")
-          ))
-        ("d" "daily and review"
-         (
-          (tags-todo "inbox")
-          ;; TODO overdue
-          ;; TODO inbox
-          ;; TODO scheduled today for work
-          ;; TODO scheduled today for personal
-          ))
-        ("t" "test"
-         ((agenda "")
-          (tags-todo "work")
-          (todo "IDEA")
-          ))
-        ))
-
-;; helm-org-rifle : quickly search through org files
-;; https://github.com/alphapapa/helm-org-rifle
-;; Helm commands: show results in a Helm buffer
-;; helm-org-rifle: Results from all open Org buffers
-;; helm-org-rifle-current-buffer: Show results from current buffer
-;; helm-org-rifle-directories: Show results from selected directories; with prefix, recursively
-;; helm-org-rifle-org-directory: Show results from Org files in org-directory
-
-;; Occur commands: show results in an occur-like, persistent buffer
-;; helm-org-rifle-occur: Show results from all open Org buffers
-;; helm-org-rifle-occur-directories: Show results from selected directories; with prefix, recursively
-;; helm-org-rifle-occur-org-directory: Show results from Org files in org-directory
-(defun rifle-in-orgs ()
-  "search in predefined $HOME/org"
-  (interactive)
-  (helm-org-rifle-directories "~/org")
-  )
-
-(define-key (current-global-map) (kbd "C-c &") 'helm-org-rifle-occur-org-directory)
-
-;; display inline image size
-(setq org-image-actual-width nil)
 
 ;; ------------------------- language specific sections below ---------------------------------------
 
@@ -382,7 +248,6 @@ regardless of whether the current buffer is in `eww-mode'."
 ;; ----- elisp ------
 ;; auto complete
 (add-hook 'emacs-lisp-mode-hook 'ielm-auto-complete)
-
 
 ;; ------- predefined split window ratio 30/70 --------
 (defun my/split-window-right (&optional arg)

@@ -180,7 +180,6 @@
   "ace-jump-mode"
   "emacs quick move minor mode"
   t)
-(global-unset-key "\M-c")
 (define-key global-map (kbd "M-c") 'ace-jump-mode)
 
 ;; global linum
@@ -347,7 +346,7 @@ regardless of whether the current buffer is in `eww-mode'."
   (helm-org-rifle-directories "~/org")
   )
 
-(global-set-key (kbd "M-s M-s") 'rifle-in-orgs)
+(define-key (current-global-map) (kbd "C-c &") 'helm-org-rifle-occur-org-directory)
 
 ;; display inline image size
 (setq org-image-actual-width nil)
@@ -395,3 +394,9 @@ A single-digit prefix argument gives the left window size arg*10%."
 
 (global-set-key (kbd "C-c x 4") 'my/split-window-right)
 (put 'narrow-to-page 'disabled nil)
+
+
+(require 'ansi-color)
+(defun display-ansi-colors ()
+  (interactive)
+  (ansi-color-apply-on-region (point-min) (point-max)))

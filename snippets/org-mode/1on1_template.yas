@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: 1-1 template
+# key: .1-1.
+# --
+
+** [`(format-time-string "%Y-%m-%d %a")`] Check in with $0 :work:1-1:
+
+$1
+
+*** action item
+
+*** take away

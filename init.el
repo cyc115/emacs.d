@@ -260,3 +260,9 @@ A single-digit prefix argument gives the left window size arg*10%."
 
 (global-set-key (kbd "C-c x 4") 'my/split-window-right)
 (put 'narrow-to-page 'disabled nil)
+
+
+(require 'ansi-color)
+(defun display-ansi-colors ()
+  (interactive)
+  (ansi-color-apply-on-region (point-min) (point-max)))

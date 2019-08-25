@@ -7,6 +7,8 @@
         ;; aws
         "http://feeds.feedburner.com/HighScalability?format=xml"
         "https://www.lastweekinaws.com/feed/"
+
+        "https://infosec-handbook.eu/blog/index.xml"
         ))
 
 ;; tagging
@@ -27,3 +29,8 @@
 (add-hook 'elfeed-new-entry-hook
           (elfeed-make-tagger :feed-url "lastweekinaws\\.com"
                               :add '(aws)))
+
+(add-hook 'elfeed-new-entry-hook
+          (elfeed-make-tagger :feed-url "https://infosec-handbook\\.eu/blog/index\\.xml"
+                              :add '(security)))
+

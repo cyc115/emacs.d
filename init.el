@@ -96,7 +96,7 @@
 ;; custom setups
 (set-default 'truncate-line t)
 (set-default 'word-wrap t)
-(desktop-save-mode 1)
+;; (desktop-save-mode 1)
 
 ;; enable mouse scrolling in osx
 (unless window-system
@@ -134,7 +134,7 @@
 ;; (global-auto-revert-mode 1)
 (setq auto-revert-check-vc-info t)
 ;; Accomodate dropbox(each machine has its own desktop file)
-(setq desktop-base-file-name (concat ".desktop." (system-name)))
+;; (setq desktop-base-file-name (concat ".desktop." (system-name)))
 
 
 ;; projectile mode setup
@@ -167,6 +167,7 @@
 
 ;; ------------------- load custom libraries ----------------------
 (load-user-file "mike/timer.el")
+(load-user-file "mike/ansi_color.el")
 (load-user-file "mike/restclient.el")
 (load-user-file "mike/ob-restclient.el")
 (load-user-file "mike/custom-org-functions.el")

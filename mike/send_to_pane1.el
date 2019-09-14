@@ -21,8 +21,8 @@
 
 (defun my/tmux-swap-pane-1-with-0 ()
   (interactive)
-  (silent-command "tmux swap-pane -s0 -t1")
-  (silent-command "tmux select-pane -t2")
+  (silent-command "tmux swap-pane -s1 -t2")
+  (silent-command "tmux select-pane -t3")
   )
 
 (defun my/tmux-send-to-pane-1 ()

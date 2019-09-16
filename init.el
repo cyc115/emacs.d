@@ -171,6 +171,7 @@
 (load-user-file "mike/restclient.el")
 (load-user-file "mike/ob-restclient.el")
 (load-user-file "mike/custom-org-functions.el")
+(load-user-file "mike/org-capture.el")
 (load-user-file "mike/custom-eww-functions.el")
 (load-user-file "mike/kali-screenshot.el")
 (load-user-file "mike/toggle-window-dedicated.el")
@@ -266,3 +267,19 @@ A single-digit prefix argument gives the left window size arg*10%."
 (defun display-ansi-colors ()
   (interactive)
   (ansi-color-apply-on-region (point-min) (point-max)))
+
+
+(defun my/rename-file-and-buffer (new-name)
+  "Renames both current buffer and file it's visiting to NEW-NAME."
+  (interactive "sNew name: ")
+  (let ((name (buffer-name))
+        (filename (buffer-file-name)))
+    (if (not filename)
+        (message "Buffer '%s' is not visiting a file!" name)
+      (if (get-buffer new-name)
+          (message "A buffer named '%s' already exists!" new-name)
+        (progn
+          (rename-file filename new-name 1)
+          (rename-buffer new-name)
+          (set-visited-file-name new-name)
+          (set-buffer-modified-p nil))))))

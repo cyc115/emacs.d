@@ -97,3 +97,5 @@
 
 ;; display inline image size
 (setq org-image-actual-width nil)
+
+(define-key org-mode-map (kbd "C-c l") 'org-store-link)

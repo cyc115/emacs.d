@@ -234,6 +234,9 @@
 ;; send line to tmux pane 1
 (load-user-file "mike/send_to_pane1.el")
 
+;; load pwk functions and tools
+(load-user-file "mike/pwk-tools.el")
+
 
 ;; ---- web mode -----
 
@@ -262,12 +265,10 @@ A single-digit prefix argument gives the left window size arg*10%."
 (global-set-key (kbd "C-c x 4") 'my/split-window-right)
 (put 'narrow-to-page 'disabled nil)
 
-
 (require 'ansi-color)
 (defun display-ansi-colors ()
   (interactive)
   (ansi-color-apply-on-region (point-min) (point-max)))
-
 
 (defun my/rename-file-and-buffer (new-name)
   "Renames both current buffer and file it's visiting to NEW-NAME."

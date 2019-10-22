@@ -7,31 +7,31 @@
    nil "*Shell Command Output*" t
    ))
 
-;; (defun silent-command (cmd)
-;;   (message cmd)
-;;   (shell-command     cmd   )
-;;   )
+(defun my/replace-in-string (what with in)
+  (replace-regexp-in-string (regexp-quote what) with in nil 'literal))
 
 (defun my/tmux-send-key (cmd)
-
+  "send cmd to tmux"
   (interactive)
   (silent-command
    (s-concat "tmux send-keys " cmd ))
   )
 
 (defun my/tmux-swap-pane-1-with-0 ()
+  "swap tmux pane 1 with pane 0"
   (interactive)
   (silent-command "tmux swap-pane -s1 -t2")
   (silent-command "tmux select-pane -t3")
   )
 
 (defun my/tmux-send-to-pane-1 ()
+  "send current line to pane 1"
   (interactive)
   (my/tmux-send-key
-  (s-concat "-t 1 '" (thing-at-point 'line t) "'" )))
+   (s-concat "-t 1 \"" (my/replace-in-string "\"" "\\\"" (thing-at-point 'line t)) "\"" )))
 
 (defun my/tmux-send-selection-1 ()
-  "show content of current region"
+  "send selected region to pane 1"
   (interactive)
   (let (pos1 pos2 bds)
     (if (use-region-p)
@@ -42,12 +42,13 @@
 
     ;;(message "Region: %s" (buffer-substring pos1 pos2) )
     (silent-command
-     (s-concat "tmux send-keys -t 1 '" (buffer-substring pos1 pos2) "'" ))
-    ))
+     (s-concat "tmux send-keys -t 1 \""
+               (my/replace-in-string "\"" "\\\"" (buffer-substring pos1 pos2))
+               "\"" ))))
 
 
 (defun my/tmux-send-selection-2 ()
-  "show content of current region"
+  "send selected region to pane 2"
   (interactive)
   (let (pos1 pos2 bds)
     (if (use-region-p)
@@ -58,9 +59,9 @@
 
     ;;(message "Region: %s" (buffer-substring pos1 pos2) )
     (silent-command
-     (s-concat "tmux send-keys -t 2 '" (buffer-substring pos1 pos2) "'" ))
-    ))
-
+     (s-concat "tmux send-keys -t 2 \""
+               (my/replace-in-string "\"" "\\\"" (buffer-substring pos1 pos2))
+               "\"" ))))
 
 (defun my/tmux-toggle-full-pane ()
   "show content of current region"
@@ -85,8 +86,7 @@
 (defun my/tmux-send-to-pane-2 ()
   (interactive)
   (my/tmux-send-key
-    (s-concat "-t 2 '" (thing-at-point 'line t) "'" ))
-  )
+   (s-concat "-t 2 \"" (my/replace-in-string "\"" "\\\"" (thing-at-point 'line t)) "\"" )))
 
 (defun my/tmux-send-pageup()
   (interactive)

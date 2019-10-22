@@ -1,13 +1,15 @@
 (setq elfeed-feeds
       '(
+        ;; security
         "http://possiblywrong.wordpress.com/feed/"
         "http://summitroute.com/blog/feed.ml"
         "https://hnrss.org/newest?points=100"
+        "https://blog.trailofbits.com/feed/"
 
         ;; aws
         "http://feeds.feedburner.com/HighScalability?format=xml"
         "https://www.lastweekinaws.com/feed/"
-
+        "https://aws.amazon.com/about-aws/whats-new/recent/feed/"
         "https://infosec-handbook.eu/blog/index.xml"
         ))
 
@@ -15,6 +17,10 @@
 (add-hook 'elfeed-new-entry-hook
           (elfeed-make-tagger :feed-url "youtube\\.com"
                               :add '(video youtube)))
+
+(add-hook 'elfeed-new-entry-hook
+          (elfeed-make-tagger :feed-url "aws\\.amazon\\.com"
+                              :add '(aws update)))
 
 ;; tag old entries as read
 (add-hook 'elfeed-new-entry-hook

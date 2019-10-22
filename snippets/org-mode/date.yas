@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: date
-# key: .dd.
+# key: .dt.
 # --
 
 [`(format-time-string "%Y-%m-%d %a %R")`]$0

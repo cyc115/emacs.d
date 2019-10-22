@@ -1,0 +1,43 @@
+# -*- mode: snippet -*-
+# name: plan-month
+# key: .pm.
+# --
+
+** Month of Oct
+
+Do the following:
+- [ ] review last month's budget under budget section
+- [ ] make a budget
+- [ ] last month review under month review section
+- [ ] Review works goals
+- [ ] Plan out this month
+- [ ] plan out the first week of the month
+
+--- EVENTS ---
+
+--- NOTES ---
+
+- Put my phone away while working.
+- Do not open reddit and HN during the day.
+- Only spend 5 minutes on HN and reddit each break time.
+
+--- TODOS ---
+
+*** Budget review
+- [ ] Did I reach my budgetary goal?
+- [ ] Which categories were not met?
+- [ ] What can I do to improve?
+
+| name        | value |
+|-------------+-------|
+| Over buget: |       |
+
+*** Month review
+Take a look at both Personal and Work notes.
+
+**** What did I accomplish?
+
+**** What did not go well?
+
+**** Where are places of improvements?
+

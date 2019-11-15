@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: simple src
+# key: .ssrc.
+# --
+
+#+BEGIN_SRC txt$2
+$1
+#+END_SRC

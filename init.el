@@ -284,3 +284,8 @@ A single-digit prefix argument gives the left window size arg*10%."
           (rename-buffer new-name)
           (set-visited-file-name new-name)
           (set-buffer-modified-p nil))))))
+
+;; turn off savehist mode as it consumes lots of cpu
+(savehist-mode 0)
+
+

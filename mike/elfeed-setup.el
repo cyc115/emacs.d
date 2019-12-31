@@ -11,6 +11,9 @@
         "https://www.lastweekinaws.com/feed/"
         "https://aws.amazon.com/about-aws/whats-new/recent/feed/"
         "https://infosec-handbook.eu/blog/index.xml"
+
+        ;; devops
+        "http://feeds.feedburner.com/sysadvent"
         ))
 
 ;; tagging
@@ -21,6 +24,11 @@
 (add-hook 'elfeed-new-entry-hook
           (elfeed-make-tagger :feed-url "aws\\.amazon\\.com"
                               :add '(aws update)))
+
+;; tagging
+(add-hook 'elfeed-new-entry-hook
+          (elfeed-make-tagger :feed-url "http://feeds.feedburner.com/sysadvent"
+                              :add '(devOps)))
 
 ;; tag old entries as read
 (add-hook 'elfeed-new-entry-hook

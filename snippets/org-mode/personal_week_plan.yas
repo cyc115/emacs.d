@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: personal-week-plan
-# key: .personal-week-plan.
+# key: .personal-week-plan. 
 # --
 
 *** Week of [`(format-time-string "%Y-%m-%d %a")`]
@@ -18,19 +18,19 @@ answer the following questions:
 - [ ] Include at least 1 night of unplanned / rewind.
 
 --- EVENTS ---
-- [ ] GYM: __ boxing days
+- [ ] GYM: __ boxing days: 
 - [ ] OFF-DAYS: 
-- [ ] UNWIND: Movie?
-- [ ] UNWIND: Outting?
+- [ ] UNWIND: ___
+- [ ] UNWIND: ___
 
 --- NOTES ---
 - Put my phone away while working.
 - Do not open reddit and HN during the day.
-- Only spend 5 minutes on HN and reddit each break time.
+- Ask for feedback.
+- Take the lead in design and technical work
 
 --- TODOS ---
 - [ ] HTB vms:
-  - [ ] 
   - [ ] 
   - [ ] 
 

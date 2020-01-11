@@ -5,6 +5,18 @@
      (file+headline "~/org/inbox.org" "Personal")
      "* IDEA %i%?
  %U")
+    ("u" "urgent this week [inbox]" entry
+     (file+headline "~/org/inbox.org" "Personal-this-week")
+     "* TODO %i%?
+ %U")
+    ("t" "Tech-experiments [inbox]" entry
+     (file+headline "~/org/inbox.org" "Tech-experiments")
+     "* IDEA %i%?
+ %U")
+    ("i" "Self improvements [inbox]" entry
+     (file+headline "~/org/inbox.org" "Self improvements")
+     "* TODO %i%?
+ %U")
     ("d" "dream [ bucketlist - things I want to do eventually] " entry
      (file "~/org/bucketlist.org")
      "* TODO %i%? 
@@ -13,23 +25,4 @@
      (file+headline "~/org/work.org" "Work")
      "* TODO %i%? 
  %U")
-    ("n" "Notes" entry
-     (file "~/org/notes.org")
-     "* NOTE %i%? 
- %U")
-    ("m" "Movies to watch [inbox]" entry
-     (file+headline "~/org/inbox.org" "Personal")
-     "* IDEA %i%? :MOVIES:
- %U")
-    ("k" "PWK lab todo" entry
-     (file+headline "~/org/pwk_course/exploit.org" "10")
-     "* TODO %i%? 
- %U")
-    ("n" "PWK lab notes" entry
-     (file+headline "~/org/pwk_course/exploit.org" "10")
-     "* NOTE %i%? 
- %U")
-    ("f" "PWK lab flags [inbox]" entry
-     (file+headline "~/org/pwk_course/exploit.org" "10")
-     "* NOTE %i%? :FLAG:
- %U"))))
+)))

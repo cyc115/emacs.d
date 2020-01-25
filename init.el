@@ -12,6 +12,7 @@
 ;; Without this comment emacs25 adds (package-initialize) here
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 (package-initialize)
 
 ;; ------------------------- original spacemacs setup --------------------------------------------------

@@ -45,8 +45,9 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
+diff-hl-mode
+yas-snippet
 				      company         ;; auto completion
-				      exwm
                                       company-tabnine ;; auto completion
                                       helm-org-rifle
                                       restclient
@@ -331,29 +332,39 @@ you should place your code here."
     ("~/org/personal.org" "~/org/inbox.org" "~/org/pwk_course/pwk.org" "~/org/pwk_course/lab.org" "~/org/pwk_course/global_todos.org" "~/org/pwk_course/exploit.org" "~/org/pentest-tools.org" "~/org/work.org")))
  '(org-capture-templates
    (quote
-    (("d" "dream [ bucketlist - things I want to do eventually] " entry
+    (("c" "Clock in what I am doing now" item
+      (file+headline "~/org/personal.org" "now :today:")
+      "%U %i")
+     ("1" "1-1 inbox [work]" checkitem
+      (file+olp "~/org/work_related.org" "1-1s")
+      "- [ ] ")
+     ("p" "Personal [inbox]" entry
+      (file+headline "~/org/inbox.org" "Personal")
+      "* IDEA %i%?
+ %U")
+     ("u" "urgent this week [inbox]" entry
+      (file+headline "~/org/inbox.org" "Personal-this-week")
+      "* TODO %i%?
+ %U")
+     ("t" "Tech-experiments [inbox]" entry
+      (file+headline "~/org/inbox.org" "Tech-experiments")
+      "* IDEA %i%?
+ %U")
+     ("i" "Self improvements [inbox]" entry
+      (file+headline "~/org/inbox.org" "Self improvements")
+      "* TODO %i%?
+ %U")
+     ("d" "dream [ bucketlist - things I want to do eventually] " entry
       (file "~/org/bucketlist.org")
       "* TODO %i%? 
  %U")
      ("w" "Work [inbox]" entry
-      (file+headline "~/org/inbox.org" "Work")
+      (file+headline "~/org/work.org" "Inbox")
       "* TODO %i%? 
  %U")
-     ("p" "Personal [inbox]" entry
-      (file+headline "~/org/inbox.org" "Personal")
+     ("l" "login migration work [Work Inbox]" entry
+      (file+headline "~/org/work.org" "Login migration")
       "* TODO %i%? 
- %U")
-     ("k" "PWK lab todo" entry
-      (file+headline "~/org/pwk_course/exploit.org" "10")
-      "* TODO %i%? 
- %U")
-     ("n" "PWK lab notes" entry
-      (file+headline "~/org/pwk_course/exploit.org" "10")
-      "* NOTE %i%? 
- %U")
-     ("f" "PWK lab flags [inbox]" entry
-      (file+headline "~/org/pwk_course/exploit.org" "10")
-      "* NOTE %i%? :FLAG:
  %U"))))
  '(package-selected-packages
    (quote

@@ -1,0 +1,46 @@
+# -*- mode: snippet -*-
+# name: pwk-exam-new-host
+# key: pwk-host
+# --
+* [Host ID]
+** flags
+
+screenshot of ~local.txt~ and ~proof.txt~:
+
+#+BEGIN_SRC sh
+# linux
+ifconfig
+# windows
+ip addr
+type proof.txt
+type local.txt
+#+END_SRC
+
+*** ~proof.txt~
+
+*** ~local.txt~
+
+** information gathering & service enumeration
+| server IP | Port Open |
+|-----------+-----------|
+|  10.11.1. | TCP:      |
+|           | UDP:      |
+
+- OS: 
+- DNS: 
+
+*** TCP open ports
+
+*** UDP open ports
+
+** pentration
+*** Vulnerability Exploited: XXX
+**** Vulnerability Explanation
+**** Vulnerability Fix
+**** Severity: Critical, Medium, Low
+**** POC Exploit
+
+
+** host enumeration
+
+** maintaining access

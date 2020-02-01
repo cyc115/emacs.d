@@ -38,15 +38,6 @@
   (require 'server)
   (unless (server-running-p) (server-start)))
 
-;; ------------------------- tools / libraries / custom setups ------------------------------------------
-
-(defun frame-bck()
-(interactive)
-(other-window -1))
-
-(define-key (current-global-map) (kbd "C-x ]") 'other-window)
-(define-key (current-global-map) (kbd "C-x [") 'frame-bck)
-;; (define-key (current-global-map) (kbd "C-x p") 'frame-bck)
 
 ;; load-user-file
 ;; load a custom .el lib from ~/.emacs.d/ directory
@@ -57,6 +48,9 @@
          user-init-directory)
         (t "~/.emacs.d/")))
 
+;; ------------------------- tools / libraries / custom setups ------------------------------------------
+
+
 ;; load-user-file loads a custom .el file from the provided directory
 ;; eg. (load-user-file "mike/timer.el")
 (defun load-user-file (file)
@@ -65,76 +59,10 @@
  (load-file (expand-file-name file user-init-dir)))
 
 
-;; custom setups
-(set-default 'truncate-line t)
-(set-default 'word-wrap t)
-;; (desktop-save-mode 1)
-
 ;; enable mouse scrolling in osx
 (unless window-system
   (global-set-key (kbd "<mouse-4>") 'scroll-down-line) ;
   (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
-
-;; allow neotree resize
-(setq neo-window-fixed-size nil)
-
-;; global linum
-(if (version< "26" emacs-version)
-    (global-display-line-numbers-mode)
-  (global-linum-mode 1))
-
-;; display time inn the status line
-(display-time-mode 1)
-
-;; --------------------- yas snippet ----------------------------
-;; config yas snippet
-(setq yas-snippet-dirs '("~/.emacs.d/snippets/"))
-
-;; enable global snippets
-;; have a fundamental-mode directory alongside whatever other snippet directories
-(add-hook 'yas-minor-mode-hook
-          (lambda ()
-            (yas-activate-extra-mode 'fundamental-mode)))
-
-(add-hook 'yas-minor-mode-hook
-          (lambda ()
-            (global-set-key (kbd "TAB") 'yas-expand))
-          )
-
-;; --------------------------- global revert-mode / projectile ---------------------------------
-;; auto-reload files from filesystem on git checkout branch
-;; (global-auto-revert-mode 1)
-(setq auto-revert-check-vc-info t)
-;; Accomodate dropbox(each machine has its own desktop file)
-;; (setq desktop-base-file-name (concat ".desktop." (system-name)))
-
-
-;; projectile mode setup
-(projectile-mode +1)
-
-;; ------------------------ auto-completion -----------------------
-
-;; tab-nine autocomplete
-;; (use-package company-tabnine :ensure t)
-;; (add-to-list 'company-backends #'company-tabnine)
-
-;; company mode setup
-(setq company-idle-delay 0)
-;; Number the candidates (use M-1, M-2 etc to select completions).
-(setq company-show-number t)
-;; Use the tab-and-go frontend.
-;; Allows TAB to select and complete at the same time.
-(company-tng-configure-default)
-(setq company-frontends
-      '(company-tng-frontend
-        company-pseudo-tooltip-frontend
-        company-echo-metadata-frontend))
-
-;; switch window mode
-(setq switch-window-shortcut-style 'qwerty)
-(setq switch-window-qwerty-shortcuts
-      '("a" "s" "d" "f" "j" "k" "l" ";" "w" "e" "i" "o"))
-(setq switch-window-shortcut-appearance 'asciiart)
 
 
 ;; ------------------- load custom libraries ----------------------
@@ -145,119 +73,33 @@
 (load-user-file "mike/custom-org-functions.el")
 (load-user-file "mike/org-capture.el")
 (load-user-file "mike/custom-eww-functions.el")
-(load-user-file "mike/kali-screenshot.el")
 (load-user-file "mike/toggle-window-dedicated.el")
+(load-user-file "mike/yas-setup.el")
+(load-user-file "mike/textmate.el")  ;; load textmate mode to enhence goto functions see: https://github.com/defunkt/textmate.el
+;; (load-user-file "mike/kali-screenshot.el")
+(load-user-file "mike/ace-jump.el")
+(load-user-file "mike/send_to_pane1.el")
+(load-user-file "mike/pwk-tools.el")
+(load-user-file "mike/custom-functions.el")
 
-;; take screenshot from emacs on kali
-(global-set-key (kbd "C-c SPC ") 'my/org-screenshot-kali)
-(global-set-key (kbd "C-c ] ") 'my/screenshot-clipboard)
+;; load ruby robocop fmter
+;; (load-user-file "mike/robocopfmt.el")
+;; (add-hook 'ruby-mode-hook #'rubocopfmt-mode)
 
-;; make buffer sticky -- prevent another window open in the same buffer
-(global-set-key (kbd "C-c t") 'toggle-window-dedicated)
+;; run test at cursor
+;; (load-user-file "mike/test_rails.el")
+;; (global-set-key (kbd "C-c C-c") 'my/rails-test-line-at-cursor)
 
-;; load textmate mode to enhence goto functions see: https://github.com/defunkt/textmate.el
-(load-user-file "mike/textmate.el")
+
+(require 'ansi-color)
+(defun my/display-ansi-colors ()
+  "decode ansi chars into colored buffer"
+  (interactive)
+  (ansi-color-apply-on-region (point-min) (point-max)))
+
+
+;; quick find files
 (require 'textmate)
 (textmate-mode)
 (global-set-key (kbd "M-p") 'textmate-goto-file)
 (global-set-key (kbd "M-]") 'textmate-goto-symbol)
-
-;; load ace-jump
-;; use [M-c + leading character] to jump to character
-(load-user-file "mike/ace-jump.el")
-(autoload
-  'ace-jump-mode
-  "ace-jump-mode"
-  "emacs quick move minor mode"
-  t)
-(define-key global-map (kbd "M-c") 'ace-jump-mode)
-
-;; ---------------------------------- org capture templates ------------------------------------------------------
-(setq org-capture-templates '(("w" "Work [inbox]" entry
-                               (file+headline "~/org/inbox.org" "Work")
-                               "* TODO %i%? \n %U")
-                              ("p" "Personal [inbox]" entry
-                               (file+headline "~/org/inbox.org" "Personal")
-                               "* TODO %i%? \n %U")
-                              ("k" "PWK / htb lab todo" entry
-                               (file+headline "~/org/hackthebox/friendzone/friendzone.org" "TODOs")
-                               "* TODO %i%? \n %U")
-                              ("n" "PWK lab notes" entry
-                               (file+headline "~/org/pwk_course/exploit.org" "5")
-                               "* NOTE %i%? \n %U")
-                              ("f" "PWK lab flags [inbox]" entry
-                               (file+headline "~/org/pwk_course/exploit.org" "5")
-                               "* NOTE %i%? :FLAG:\n %U")
-                              ) )
-(global-set-key (kbd "M-q ") 'org-capture)
-
-;; ------------------------- language specific sections below ---------------------------------------
-
-;; ----- ruby -----
-
-;; load ruby robocop fmter
-(load-user-file "mike/robocopfmt.el")
-;; (add-hook 'ruby-mode-hook #'rubocopfmt-mode)
-
-;; run test at cursor
-(load-user-file "mike/test_rails.el")
-;; (global-set-key (kbd "C-c C-c") 'my/rails-test-line-at-cursor)
-
-;; send line to tmux pane 1
-(load-user-file "mike/send_to_pane1.el")
-
-;; load pwk functions and tools
-(load-user-file "mike/pwk-tools.el")
-
-
-;; ---- web mode -----
-
-;; does not warn about missing semicolon
-(setq js2-strict-missing-semi-warning nil)
-(setq js2-missing-semi-one-line-override nil)
-
-(defun my-web-mode-hook ()
-  "Hooks for Web mode."
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
-  )
-(add-hook 'web-mode-hook  'my-web-mode-hook)
-;; ----- elisp ------
-;; auto complete
-(add-hook 'emacs-lisp-mode-hook 'ielm-auto-complete)
-
-;; ------- predefined split window ratio 30/70 --------
-(defun my/split-window-right (&optional arg)
-  "Split the current window 30/70
-A single-digit prefix argument gives the left window size arg*10%."
-  (interactive "P")
-  (let ((proportion (* (or arg 12) 0.1)))
-    (split-window-right (round (* proportion (window-height))))))
-
-(global-set-key (kbd "C-c x 4") 'my/split-window-right)
-(put 'narrow-to-page 'disabled nil)
-
-(require 'ansi-color)
-(defun display-ansi-colors ()
-  (interactive)
-  (ansi-color-apply-on-region (point-min) (point-max)))
-
-(defun my/rename-file-and-buffer (new-name)
-  "Renames both current buffer and file it's visiting to NEW-NAME."
-  (interactive "sNew name: ")
-  (let ((name (buffer-name))
-        (filename (buffer-file-name)))
-    (if (not filename)
-        (message "Buffer '%s' is not visiting a file!" name)
-      (if (get-buffer new-name)
-          (message "A buffer named '%s' already exists!" new-name)
-        (progn
-          (rename-file filename new-name 1)
-          (rename-buffer new-name)
-          (set-visited-file-name new-name)
-          (set-buffer-modified-p nil))))))
-
-;; turn off savehist mode as it consumes lots of cpu
-(savehist-mode 0)
-
-

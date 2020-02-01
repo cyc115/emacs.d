@@ -25,4 +25,4 @@
      (file+headline "~/org/work.org" "Work")
      "* TODO %i%? 
  %U")
-)))
+    )))

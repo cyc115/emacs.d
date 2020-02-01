@@ -96,6 +96,6 @@
 (define-key (current-global-map) (kbd "C-c &") 'helm-org-rifle-occur-org-directory)
 
 ;; display inline image size
-(setq org-image-actual-width nil)
+(setq org-image-actual-width 400)
 
 (define-key org-mode-map (kbd "C-c l") 'org-store-link)

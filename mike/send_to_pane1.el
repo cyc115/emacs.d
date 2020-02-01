@@ -28,7 +28,7 @@
   "send current line to pane 1"
   (interactive)
   (my/tmux-send-key
-   (s-concat "-t 1 \"" (my/replace-in-string "\"" "\\\"" (thing-at-point 'line t)) "\"" )))
+   (s-concat "-t 1 \"" (my/replace-in-string "$" "\\$" (my/replace-in-string "\"" "\\\"" (thing-at-point 'line t))) "\"" )))
 
 (defun my/tmux-send-selection-1 ()
   "send selected region to pane 1"
@@ -43,7 +43,7 @@
     ;;(message "Region: %s" (buffer-substring pos1 pos2) )
     (silent-command
      (s-concat "tmux send-keys -t 1 \""
-               (my/replace-in-string "\"" "\\\"" (buffer-substring pos1 pos2))
+               (my/replace-in-string "$" "\\$" (my/replace-in-string "\"" "\\\"" (buffer-substring pos1 pos2)))
                "\"" ))))
 
 
@@ -60,7 +60,7 @@
     ;;(message "Region: %s" (buffer-substring pos1 pos2) )
     (silent-command
      (s-concat "tmux send-keys -t 2 \""
-               (my/replace-in-string "\"" "\\\"" (buffer-substring pos1 pos2))
+               (my/replace-in-string "$" "\\$" (my/replace-in-string "\"" "\\\"" (buffer-substring pos1 pos2)))
                "\"" ))))
 
 (defun my/tmux-toggle-full-pane ()
@@ -86,7 +86,8 @@
 (defun my/tmux-send-to-pane-2 ()
   (interactive)
   (my/tmux-send-key
-   (s-concat "-t 2 \"" (my/replace-in-string "\"" "\\\"" (thing-at-point 'line t)) "\"" )))
+   (s-concat "-t 2 \""
+             (my/replace-in-string "$" "\\$" (my/replace-in-string "\"" "\\\"" (thing-at-point 'line t))) "\"" )))
 
 (defun my/tmux-send-pageup()
   (interactive)

@@ -12,36 +12,8 @@
 ;; Without this comment emacs25 adds (package-initialize) here
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 (package-initialize)
-
-;; ------------------------- emacs windows manager related setups  --------------------------------------------------
-(require 'exwm)
-(require 'exwm-config)
-(require 'exwm-randr)
-(setq exwm-randr-workspace-output-plist '(1 "eDP-1" 2 "DP-2"))
-
-(add-hook 'exwm-randr-screen-change-hook
-          (lambda ()
-            (start-process-shell-command
-             ;; top-bottom
-             ;; "xrandr" nil "xrandr --output eDP-1 --output DP-2 --above eDP-1 --auto"
-
-             ;; left-right
-             "xrandr" nil "xrandr --output eDP-1 --output DP-2 --right-of eDP-1 --primary --auto"
-             )))
-
-(exwm-randr-enable)
-(exwm-config-default)
-(define-key exwm-mode-map [?\C-q] 'exwm-input-release-keyboard)
-
-(defun exwm-logout ()
-  (interactive)
-  (recentf-save-list)
-  (save-some-buffers)
-  (start-process-shell-command "logout" nil "lxsession-logout"))
-
-(symon-mode)
-(add-hook 'after-init-hook #'fancy-battery-mode)
 
 ;; ------------------------- original spacemacs setup --------------------------------------------------
 
@@ -284,3 +256,8 @@ A single-digit prefix argument gives the left window size arg*10%."
           (rename-buffer new-name)
           (set-visited-file-name new-name)
           (set-buffer-modified-p nil))))))
+
+;; turn off savehist mode as it consumes lots of cpu
+(savehist-mode 0)
+
+

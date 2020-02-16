@@ -103,3 +103,18 @@
 (textmate-mode)
 (global-set-key (kbd "M-p") 'textmate-goto-file)
 (global-set-key (kbd "M-]") 'textmate-goto-symbol)
+
+
+(defun my/org-screenshot ()
+  "Take a screenshot into a time stamped unique-named file in the
+same directory as the org-buffer and insert a link to this file."
+  (interactive)
+  (setq filename
+        (concat
+         (concat "~/org/res/img/"(format-time-string "%Y-%m-%d_%H%M%S")) ".png"))
+  (shell-command (concat "gnome-screenshot -a -f " filename))
+  ;; (shell-command (concat "" filename ""))
+  (insert (concat "[[file:" filename "]]"))
+  (org-display-inline-images))
+
+(global-set-key "\C-cs" 'my/org-screenshot)

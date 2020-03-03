@@ -97,9 +97,43 @@
   (interactive)
   (ansi-color-apply-on-region (point-min) (point-max)))
 
+(defun my/rename-file-and-buffer (new-name)
+  "Renames both current buffer and file it's visiting to NEW-NAME."
+  (interactive "sNew name: ")
+  (let ((name (buffer-name))
+        (filename (buffer-file-name)))
+    (if (not filename)
+        (message "Buffer '%s' is not visiting a file!" name)
+      (if (get-buffer new-name)
+          (message "A buffer named '%s' already exists!" new-name)
+        (progn
+          (rename-file filename new-name 1)
+          (rename-buffer new-name)
+          (set-visited-file-name new-name)
+          (set-buffer-modified-p nil))))))
+
+;; turn off savehist mode as it consumes lots of cpu
+(savehist-mode 0)
+
+(global-set-key (kbd "C-x g") 'google-this-search)
 
 ;; quick find files
 (require 'textmate)
 (textmate-mode)
 (global-set-key (kbd "M-p") 'textmate-goto-file)
 (global-set-key (kbd "M-]") 'textmate-goto-symbol)
+
+
+(defun my/org-screenshot ()
+  "Take a screenshot into a time stamped unique-named file in the
+same directory as the org-buffer and insert a link to this file."
+  (interactive)
+  (setq filename
+        (concat
+         (concat "~/org/res/img/"(format-time-string "%Y-%m-%d_%H%M%S")) ".png"))
+  (shell-command (concat "gnome-screenshot -a -f " filename))
+  ;; (shell-command (concat "" filename ""))
+  (insert (concat "[[file:" filename "]]"))
+  (org-display-inline-images))
+
+(global-set-key "\C-cs" 'my/org-screenshot)

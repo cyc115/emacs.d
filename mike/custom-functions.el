@@ -133,3 +133,11 @@
 ;; does not warn about missing semicolon
 (setq js2-strict-missing-semi-warning nil)
 (setq js2-missing-semi-one-line-override nil)
+
+
+(require 'org-crypt)
+; Encrypt all entries before saving
+(org-crypt-use-before-save-magic)
+(setq org-tags-exclude-from-inheritance (quote ("crypt")))
+; GPG key to use for encryption
+(setq org-crypt-key "F0B66B40")

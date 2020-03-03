@@ -7,28 +7,37 @@
 
 **** Events / Notes / Todos
 
+# habits
+|                | M | T | W | TH | F | SA | SU |
+|----------------+---+---+---+----+---+----+----|
+| sleep 7hr      |   |   |   |    |   |    |    |
+| 2 coffee       |   |   |   |    |   |    |    |
+| less 50g sugar |   |   |   |    |   |    |    |
+
+
+# Exercises
+|                 | M | T | W | TH | F | SA | SU |
+|-----------------+---+---+---+----+---+----+----|
+| Boxing practice |   |   |   |    |   |    |    |
+| Boxing @ 6      |   |   |   |    |   |    |    |
+| Exec at Lorna's |   |   |   |    |   |    |    |
+| Home Exercise   |   |   |   |    |   |    |    |
+
 answer the following questions:
-- [ ] Review last week:
-  - [ ] What did I do right and what can be improved?
-  - [ ] What have I achieved and what are there left to do?
-- [ ] What do I want to achieve this week?
-  - [ ] List: what activities, habits and projects have a high impact on your goals?
-  - [ ] How can I improve this week based on the feedback from last week?
-- [ ] Are there any special events?
-- [ ] Include at least 1 night of unplanned / rewind.
+- [ ] Review last week's notes:
+  - [ ] What did I do right and what are improvements to be made?
+  - [ ] what's left to do?
+- [ ] What do I want to accomplish this week?
+  - [ ] What are the high impact activities and projects?
+  - [ ] Incorporate [[file:~/org/learning.org::*feedback][feedback]], [[file:~/org/personal.org::*2019%20manager%20evaluation%20feedback:][2019 manager evaluation feedback:]]
+- [ ] Any events this week?
 
 --- EVENTS ---
 - [ ] GYM: __ boxing days: 
-- [ ] OFF-DAYS: 
-- [ ] UNWIND: ___
 - [ ] UNWIND: ___
 
 --- NOTES ---
-- Put my phone away while working.
 - Do not open reddit and HN during the day.
-- Ask for feedback.
 - Take the lead in design and technical work
-
---- TODOS ---
-- [ ] 
+- [[file:~/org/learning.org::*feedback][more feedback]]
 

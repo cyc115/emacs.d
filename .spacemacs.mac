@@ -31,13 +31,16 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     javascript
+     python
      auto-completion
      better-defaults
      emacs-lisp
      git
-     helm
-;;      html
-;;      javascript
+     ;; helm
+     ;; html
+     ;; javascript
+     ivy
      markdown
      org
      ruby
@@ -53,7 +56,8 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
 				                              symon
-			                                exwm
+			                                ;; exwm
+                                      howdoyou
                                       ;; devdocs
                                       company-tabnine
                                       elfeed
@@ -62,6 +66,8 @@ values."
                                       prettier-js
                                       restclient
                                       zoom
+                                      indium
+                                      google-this
 
  )
    ;; A list of packages that cannot be updated.
@@ -333,47 +339,77 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
    ["#0a0814" "#f2241f" "#67b11d" "#b1951d" "#4f97d7" "#a31db1" "#28def0" "#b2b2b2"])
+ '(browse-url-browser-function (quote browse-url-default-macosx-browser))
  '(custom-safe-themes
    (quote
     ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" default)))
  '(evil-want-Y-yank-to-eol nil)
+ '(groovy-indent-offset 2)
+ '(network-security-level (quote low))
+ '(org-agenda-custom-commands
+   (quote
+    (("w" "Daily stuff:  Agenda + :thisweek:work: + :thisweek: "
+      ((agenda "" nil)
+       (tags-todo ":thisweek:work:"
+                  ((org-agenda-overriding-header "")))
+       (tags-todo ":thisweek:" nil)
+       (tags-todo ":Q1:" nil))
+      nil)
+     ("p" "Agenda and personal related tasks"
+      ((agenda "" nil)
+       (tags-todo "personal" nil))
+      nil)
+     ("d" "daily and review"
+      ((tags-todo "inbox" nil))
+      nil))))
  '(org-agenda-files
    (quote
-    ("~/Dropbox (Personal)/planning/work_related.org" "~/org/inbox.org" "~/Dropbox (Personal)/planning/work.org" "~/Dropbox (Personal)/planning/personal.org" "~/Dropbox (Personal)/planning/personal.org_archive" "~/Dropbox (Personal)/planning/work.org_archive")))
+    ("~/org/pwk.org" "~/org/pci.org" "~/org/work.org" "~/org/personal.org" "~/org/inbox.org" "~/org/pentest-tools.org")))
  '(org-capture-templates
    (quote
-    (("d" "Dream [ bucketlist - things I want to do eventually] " entry
+    (("c" "Clock in what I am doing now" item
+      (file+headline "~/org/personal.org" "now :today:")
+      "%U %i")
+     ("1" "1-1 inbox [work]" checkitem
+      (file+olp "~/org/work_related.org" "1-1 this week :1on1:")
+      "- [ ] ")
+     ("p" "Personal [inbox]" entry
+      (file+headline "~/org/inbox.org" "Personal")
+      "* IDEA %i%?
+ %U")
+     ("u" "urgent this week [inbox]" entry
+      (file+headline "~/org/inbox.org" "Personal-this-week")
+      "* TODO %i%?
+ %U")
+     ("t" "Tech-experiments [inbox]" entry
+      (file+headline "~/org/inbox.org" "Tech-experiments")
+      "* IDEA %i%?
+ %U")
+     ("i" "Self improvements [inbox]" entry
+      (file+headline "~/org/inbox.org" "Self improvements")
+      "* TODO %i%?
+ %U")
+     ("d" "dream [ bucketlist - things I want to do eventually] " entry
       (file "~/org/bucketlist.org")
       "* TODO %i%? 
  %U")
      ("w" "Work [inbox]" entry
-      (file+olp+datetree "~/org/work.org" "Work")
+      (file+headline "~/org/work.org" "Inbox")
       "* TODO %i%? 
  %U")
-     ("p" "Personal [inbox]" entry
-      (file+headline "~/org/inbox.org" "Personal")
+     ("l" "login migration work [Work Inbox]" entry
+      (file+headline "~/org/work.org" "Login migration")
       "* TODO %i%? 
- %U")
-     ("k" "PWK / htb lab todo" entry
-      (file+headline "~/org/hackthebox/friendzone/friendzone.org" "TODOs")
-      "* TODO %i%? 
- %U")
-     ("n" "PWK lab notes" entry
-      (file+headline "~/org/pwk_course/exploit.org" "5")
-      "* NOTE %i%? 
- %U")
-     ("f" "PWK lab flags [inbox]" entry
-      (file+headline "~/org/pwk_course/exploit.org" "5")
-      "* NOTE %i%? :FLAG:
  %U"))))
  '(package-selected-packages
    (quote
-    (elfeed symon interleave powershell pdf-tools helm-org-rifle origami ob-async graphql-mode sql-indent devdocs csv-mode go-guru go-eldoc company-go go-mode helm-dash zoom wsd-mode prettier-js dockerfile-mode docker tablist docker-tramp groovy-mode restclient engine-mode org-trello helm-w3m w3m company-tabnine xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help idle-highlight-mode toml-mode racer flycheck-rust cargo rust-mode terraform-mode hcl-mode company-anaconda org-alert tea-time switch-window treepy graphql yaml-mode flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck auto-dictionary org-projectile-helm unfill smeargle reveal-in-osx-finder pbcopy osx-trash osx-dictionary orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim magit-gitflow launchctl htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy evil-magit magit magit-popup git-commit ghub with-editor company-web web-completion-data company-tern tern company-statistics company auto-yasnippet ac-ispell auto-complete yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode anaconda-mode pythonic sass-mode web-mode tagedit slim-mode scss-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode vue-mode edit-indirect ssass-mode vue-html-mode web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode mmm-mode markdown-toc markdown-mode gh-md spinner org-plus-contrib evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu undo-tree adaptive-wrap bundler vimrc-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest dactyl-mode chruby inf-ruby ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smartparens restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-search-highlight-persist evil-numbers evil-nerd-commenter evil goto-chg eval-sexp-fu highlight elisp-slime-nav dumb-jump diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup async evil-unimpaired f s dash)))
+    (google-this indium edit-server wgrep smex ivy-hydra lv flyspell-correct-ivy counsel-projectile counsel swiper ivy github-clone browse-at-remote howdoyou elfeed symon interleave powershell pdf-tools helm-org-rifle origami ob-async graphql-mode sql-indent devdocs csv-mode go-guru go-eldoc company-go go-mode helm-dash zoom wsd-mode prettier-js dockerfile-mode docker tablist docker-tramp groovy-mode restclient engine-mode org-trello helm-w3m w3m company-tabnine xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help idle-highlight-mode toml-mode racer flycheck-rust cargo rust-mode terraform-mode hcl-mode company-anaconda org-alert tea-time switch-window treepy graphql yaml-mode flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck auto-dictionary org-projectile-helm unfill smeargle reveal-in-osx-finder pbcopy osx-trash osx-dictionary orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim magit-gitflow launchctl htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy evil-magit magit magit-popup git-commit ghub with-editor company-web web-completion-data company-tern tern company-statistics company auto-yasnippet ac-ispell auto-complete yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode anaconda-mode pythonic sass-mode web-mode tagedit slim-mode scss-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode vue-mode edit-indirect ssass-mode vue-html-mode web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode mmm-mode markdown-toc markdown-mode gh-md spinner org-plus-contrib evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu undo-tree adaptive-wrap bundler vimrc-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest dactyl-mode chruby inf-ruby ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smartparens restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-search-highlight-persist evil-numbers evil-nerd-commenter evil goto-chg eval-sexp-fu highlight elisp-slime-nav dumb-jump diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup async evil-unimpaired f s dash)))
  '(safe-local-variable-values
    (quote
     ((rspec-docker-cwd . "/home/bt/")
      (rspec-docker-container . "")
-     (rspec-use-docker-when-possible quote t)))))
+     (rspec-use-docker-when-possible quote t))))
+ '(zoom-size (quote (80 . 30))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

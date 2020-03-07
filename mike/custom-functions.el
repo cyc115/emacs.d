@@ -141,3 +141,7 @@
 (setq org-tags-exclude-from-inheritance (quote ("crypt")))
 ; GPG key to use for encryption
 (setq org-crypt-key "F0B66B40")
+
+
+;; Remove this initial input in all commands:
+(setq ivy-initial-inputs-alist nil)

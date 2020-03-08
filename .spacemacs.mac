@@ -31,21 +31,19 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     javascript
-     python
      auto-completion
      better-defaults
      emacs-lisp
      git
-     ;; helm
-     ;; html
-     ;; javascript
      ivy
+     javascript
      markdown
      org
+     python
      ruby
      spell-checking
      syntax-checking
+     yaml
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
@@ -56,20 +54,16 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
 				                              symon
-			                                ;; exwm
-                                      howdoyou
-                                      ;; devdocs
-                                      company-tabnine
                                       elfeed
+                                      google-this
                                       helm-org-rifle
+                                      howdoyou
+                                      indium
                                       ob-async
                                       prettier-js
                                       restclient
                                       zoom
-                                      indium
-                                      google-this
-
- )
+                                      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -325,9 +319,11 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
-
-  ;; ------- elfeed --------
   (load-user-file "mike/elfeed-setup.el")
+
+  (spacemacs/set-leader-keys
+    "*" 'counsel-ag
+    )
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -363,11 +359,38 @@ you should place your code here."
       ((tags-todo "inbox" nil))
       nil))))
  '(org-agenda-files
-   (quote
-    ("~/org/pwk.org" "~/org/pci.org" "~/org/work.org" "~/org/personal.org" "~/org/inbox.org" "~/org/pentest-tools.org")))
+	 (quote
+		(
+		 "~/org/angular.org"
+		 "~/org/bucketlist.org"
+		 "~/org/defcon.org"
+		 "~/org/dostackbufferoverflowgood_slides.org"
+		 "~/org/elearn.org"
+		 "~/org/google_10k_2019.org"
+		 "~/org/inbox.org"
+		 "~/org/learning.org"
+		 "~/org/metasploit.org"
+		 "~/org/notes.org"
+		 "~/org/osint.org"
+		 "~/org/overthewire.org"
+		 "~/org/pci.org"
+		 "~/org/pentest-tools.org"
+		 "~/org/pentesting.org"
+		 "~/org/personal.org"
+		 "~/org/pwk.org"
+		 "~/org/readings.org"
+		 "~/org/startupschool.org"
+		 "~/org/test.org"
+		 "~/org/work_related.org"
+		 "~/org/twistlock.org")))
  '(org-capture-templates
-   (quote
-    (("c" "Clock in what I am doing now" item
+	 (quote
+		(("b" "bookmark" entry
+			(file+headline "~/org/bookmark.org" "bookmark :bookmark:")
+			"* NOTE %i%?
+ %U
+")
+     ("c" "Clock in what I am doing now" item
       (file+headline "~/org/personal.org" "now :today:")
       "%U %i")
      ("1" "1-1 inbox [work]" checkitem

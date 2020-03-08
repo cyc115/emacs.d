@@ -102,6 +102,13 @@
   (setq buffer-display-table (make-display-table))
   (aset buffer-display-table ?\^M []))
 
+;; (def url-encode ()
+;; 		 "url encode hilighted content"
+;; 		 (interactive)
+;; 		 (require 'browse-url)
+;; 		 (browse-url-url-encode-chars "https://en.wikipedia.org/wiki/Blue_(disambiguation)")
+;; 		 )
+
 ;; ------------------------ auto-completion -----------------------
 
 ;; tab-nine autocomplete

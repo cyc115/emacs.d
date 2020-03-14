@@ -102,6 +102,13 @@
   (setq buffer-display-table (make-display-table))
   (aset buffer-display-table ?\^M []))
 
+;; (def url-encode ()
+;; 		 "url encode hilighted content"
+;; 		 (interactive)
+;; 		 (require 'browse-url)
+;; 		 (browse-url-url-encode-chars "https://en.wikipedia.org/wiki/Blue_(disambiguation)")
+;; 		 )
+
 ;; ------------------------ auto-completion -----------------------
 
 ;; tab-nine autocomplete
@@ -141,3 +148,7 @@
 (setq org-tags-exclude-from-inheritance (quote ("crypt")))
 ; GPG key to use for encryption
 (setq org-crypt-key "F0B66B40")
+
+
+;; Remove this initial input in all commands:
+(setq ivy-initial-inputs-alist nil)

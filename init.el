@@ -116,6 +116,7 @@
 (savehist-mode 0)
 
 (global-set-key (kbd "C-x g") 'google-this-search)
+(global-set-key (kbd "C-c g") 'counsel-search)
 
 ;; quick find files
 (require 'textmate)

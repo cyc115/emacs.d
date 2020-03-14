@@ -46,33 +46,21 @@
 
 ;; org custom agenda views
 (setq org-agenda-custom-commands
-      '(
-        ("k" "pwk lab relate tasks"
-         (
-          (tags-todo "pwk")
-          ))
-        ("w" "Agenda and work related"
-         ((agenda "")
-          (tags-todo "work")
-          ))
+      (quote
+       (("w" "Daily stuff:  Agenda + :thisweek:work: + :thisweek: "
+         ((agenda "" nil)
+          (tags-todo ":thisweek:work:"
+                     ((org-agenda-overriding-header "")))
+          (tags-todo ":thisweek:" nil)
+          (tags-todo ":Q1:" nil))
+         nil)
         ("p" "Agenda and personal related tasks"
-         ((agenda "")
-          (tags-todo "personal")
-          ))
+         ((agenda "" nil)
+          (tags-todo "personal" nil))
+         nil)
         ("d" "daily and review"
-         (
-          (tags-todo "inbox")
-          ;; TODO overdue
-          ;; TODO inbox
-          ;; TODO scheduled today for work
-          ;; TODO scheduled today for personal
-          ))
-        ("t" "test"
-         ((agenda "")
-          (tags-todo "work")
-          (todo "IDEA")
-          ))
-        ))
+         ((tags-todo "inbox" nil))
+         nil))))
 
 
 ;; helm-org-rifle : quickly search through org files

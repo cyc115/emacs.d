@@ -1,5 +1,5 @@
 ;; ------------------------ general setup  -----------------------
-(symon-mode)
+;; (symon-mode)
 (add-hook 'after-init-hook #'fancy-battery-mode)
 
 

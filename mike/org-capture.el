@@ -1,6 +1,6 @@
- '(org-capture-templates
-   (quote
-    (("c" "Clock in what I am doing now" item
+ (setq org-capture-templates
+   '(
+    ("c" "Clock in what I am doing now" item
       (file+headline "~/org/personal.org" "now :today:")
       "%U %i")
      ("1" "1-1 inbox [work]" checkitem
@@ -33,4 +33,9 @@
      ("l" "login migration work [Work Inbox]" entry
       (file+headline "~/org/work.org" "Login migration")
       "* TODO %i%? 
- %U"))))
+ %U")
+     ("V" "Investment notes [personal]" entry
+      (file+headline "~/org/personal.org" "Investment :investment:")
+      "* NOTE %i%?
+ %U")
+     ))

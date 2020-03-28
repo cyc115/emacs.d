@@ -82,13 +82,14 @@
 ;; helm-org-rifle-occur: Show results from all open Org buffers
 ;; helm-org-rifle-occur-directories: Show results from selected directories; with prefix, recursively
 ;; helm-org-rifle-occur-org-directory: Show results from Org files in org-directory
-(defun rifle-in-orgs ()
-  "search in predefined $HOME/org"
-  (interactive)
-  (helm-org-rifle-directories "~/org")
-  )
 
-(define-key (current-global-map) (kbd "C-c &") 'helm-org-rifle-occur-org-directory)
+(defun my/search-today-i-learned ()
+  "search TIL notes in learning.org"
+  (interactive)
+  (helm-org-rifle-files "~/org/learning.org"))
+
+(define-key (current-global-map) (kbd "C-c &") 'my/search-today-i-learned)
+(define-key (current-global-map) (kbd "C-c f") 'helm-org-rifle-agenda-files)
 
 ;; display inline image size
 (setq org-image-actual-width 400)

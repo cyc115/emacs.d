@@ -53,9 +53,9 @@
           (agenda "" nil)
           ;; show additional lists
           (tags-todo ":thisweek:work:" ((org-agenda-overriding-header "This week @ work")))
-          (tags-todo ":thisweek:" ((org-agenda-overriding-header "This week")))
-          (tags-todo ":Q1:" ((org-agenda-overriding-header "This Quarter")))
-          (tags-todo ":inbox:" ((org-agenda-overriding-header "All inbox"))))
+          (tags-todo "thisweek-work" ((org-agenda-overriding-header "This week")))
+          (tags-todo "Q1" ((org-agenda-overriding-header "This Quarter")))
+          (tags-todo "inbox" ((org-agenda-overriding-header "All inbox"))))
 
          ((org-agenda-start-with-log-mode '(closed clock state))
           (org-agenda-start-with-clockreport-mode t)

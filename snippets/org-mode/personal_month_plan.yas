@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: personal-month-plan
+# key: .personal-month-plan
+# --
+
+** Month of $1
+
+Do the following:
+- [ ] review last month's budget under budget section
+- [ ] make a budget
+- [ ] last month review under month review section
+- [ ] Review works goals
+- [ ] Plan out this month
+- [ ] plan out the first week of the month
+
+
+*** Budget review
+- [ ] Did I reach my budgetary goal?
+- [ ] Which categories were not met?
+- [ ] What can I do to improve?
+
+| name        | value |
+|-------------+-------|
+| Over buget: |       |
+
+*** Month review
+Take a look at both Personal and Work notes.
+
+**** What did I accomplish?
+
+**** What did not go well?
+
+**** Where are places of improvements?
+

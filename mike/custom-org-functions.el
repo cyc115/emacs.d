@@ -88,8 +88,8 @@
   (interactive)
   (helm-org-rifle-files "~/org/learning.org"))
 
-(define-key (current-global-map) (kbd "C-c &") 'my/search-today-i-learned)
-(define-key (current-global-map) (kbd "C-c f") 'helm-org-rifle-agenda-files)
+(global-set-key (kbd "C-c &") 'my/search-today-i-learned)
+(global-set-key (kbd "C-c f") 'helm-org-rifle-agenda-files)
 
 ;; display inline image size
 (setq org-image-actual-width 400)

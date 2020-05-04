@@ -12,8 +12,8 @@
          (file+headline "~/org/inbox.org" "Personal")
          "* IDEA %i%?
  %U")
-        ("u" "urgent this week [inbox]" entry
-         (file+headline "~/org/inbox.org" "Personal-this-week")
+        ("w" "Work [inbox]" entry
+         (file+headline "~/org/work.org" "Inbox")
          "* TODO %i%?
  %U")
         ("t" "Tech-experiments [inbox]" entry
@@ -28,20 +28,11 @@
          (file "~/org/bucketlist.org")
          "* TODO %i%?
  %U")
-        ("w" "Work [inbox]" entry
-         (file+headline "~/org/work.org" "Inbox")
-         "* TODO %i%?
- %U")
-        ("l" "login migration work [Work Inbox]" entry
-         (file+headline "~/org/work.org" "Login migration")
-         "* TODO %i%?
- %U")
         ("T" "Today I learned [learning]" entry
          (file+headline "~/org/learning.org" "TIL :til:")
          "* NOTE %i%?
  %U")
-        ("v" "Investment notes [personal]" entry
-         (file+headline "~/org/personal.org" "Investment :investment:")
-         "* NOTE %i%?
- %U")
+        ("H" "daily highlight [personal]" checkitem
+         (file+olp "~/org/personal.org" "daily highlight")
+         "- [ ] %t %?")
         ))

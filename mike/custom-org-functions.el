@@ -95,3 +95,6 @@
 (setq org-image-actual-width 400)
 
 (define-key org-mode-map (kbd "C-c l") 'org-store-link)
+
+;; generate agenda every 5 minutes idle
+(run-with-idle-timer 5 nil (lambda () (org-agenda-list) (delete-window)))

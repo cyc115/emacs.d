@@ -5,17 +5,20 @@
          "* NOTE %i%?
  %U
 ")
-        ("1" "1-1 inbox [work]" checkitem
+        ("1" "1-1 inbox [work_related]" checkitem
          (file+olp "~/org/work_related.org" "1-1s")
          "- [ ] ")
         ("p" "Personal [inbox]" entry
          (file+headline "~/org/inbox.org" "Personal")
          "* IDEA %i%?
  %U")
-        ("w" "Work [inbox]" entry
+        ("w" "Work [work]" entry
          (file+headline "~/org/work.org" "Inbox")
          "* TODO %i%?
  %U")
+        ("I" "Work Interrupt [work]" checkitem
+         (file+olp "~/org/work.org" "Interrupt")
+         "- [ ] %t %?")
         ("t" "Tech-experiments [inbox]" entry
          (file+headline "~/org/inbox.org" "Tech-experiments")
          "* IDEA %i%?

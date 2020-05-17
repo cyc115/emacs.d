@@ -42,7 +42,10 @@
     (cond ((apply '> cmp) 1)
           ((apply '< cmp) -1)
           (t nil))))
+
 (setq org-agenda-cmp-user-defined 'my/user-todo-sort)
+(setq org-agenda-skip-unavailable-files t)
+(setq org-agenda-skip-scheduled-if-done t)
 
 ;; org custom agenda views
 (setq org-agenda-custom-commands

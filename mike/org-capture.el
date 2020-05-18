@@ -16,6 +16,10 @@
          (file+headline "~/org/work.org" "Inbox")
          "* TODO %i%?
  %U")
+        ("L" "locksmith [work]" entry
+         (file+headline "~/org/work.org" "locksmith :locksmith:")
+         "* TODO %i%?
+ %U")
         ("I" "Work Interrupt [work]" checkitem
          (file+olp "~/org/work.org" "Interrupt")
          "- [ ] %t %?")

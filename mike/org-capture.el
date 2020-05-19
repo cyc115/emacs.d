@@ -42,4 +42,7 @@
         ("H" "daily highlight [personal]" checkitem
          (file+olp "~/org/personal.org" "daily highlight")
          "- [ ] %t %?")
+        ("n" "Currently clocked-in" item (clock)
+         "Note taken on %U \\\\ \n%?"
+         :prepend t)
         ))

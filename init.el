@@ -123,6 +123,7 @@
 (textmate-mode)
 (global-set-key (kbd "M-p") 'textmate-goto-file)
 (global-set-key (kbd "M-]") 'textmate-goto-symbol)
+(textmate-also-ignore "bin|gems")
 
 
 (defun my/org-screenshot ()

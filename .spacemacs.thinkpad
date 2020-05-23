@@ -34,6 +34,7 @@ values."
      auto-completion
      better-defaults
      emacs-lisp
+     elfeed
      git
      html
      ivy
@@ -56,22 +57,23 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
-																			company         ;; auto
+																			company
 																			dockerfile-mode
 																			google-this
+                                      ;; inline-crypt
+                                      ;; rjsx-mode ;; react jsx mode
+                                      ;; symon ;; system monitor
                                       elfeed
                                       helm-org-rifle
-                                      inline-crypt
                                       interleave
+                                      org-drill
                                       org-noter
                                       org-plus-contrib
                                       org-present
                                       org-projectile
                                       orgit
-                                      pdf-tools ;; for reading pdfs
+                                      pdf-tools
                                       restclient
-                                      rjsx-mode ;; react jsx mode
-                                      symon ;; system monitor
                                       yarn-mode
                                       zoom
                                       )
@@ -335,6 +337,8 @@ you should place your code here."
   (spacemacs/set-leader-keys
     "*" 'counsel-ag
     )
+
+  (require 'org-drill)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -347,152 +351,25 @@ you should place your code here."
  '(browse-url-browser-function (quote eww-browse-url))
  '(browse-url-firefox-program "/home/cyc115/firefox/firefox")
  '(custom-safe-themes
-	 (quote
-		("fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" default)))
+   (quote
+    ("fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" default)))
  '(enwc-wired-device "wlan0")
  '(enwc-wireless-device "wlan0")
  '(evil-want-Y-yank-to-eol nil)
- '(exwm-input-global-keys
-	 (quote
-		(([8388722]
-			. exwm-reset)
-		 ([8388727]
-			. exwm-workspace-switch)
-		 ([8388646]
-			lambda
-			(command)
-			(interactive
-			 (list
-				(read-shell-command "$ ")))
-			(start-process-shell-command command nil command))
-		 ([8388656]
-			lambda nil
-			(interactive)
-			(exwm-workspace-switch-create 0))
-		 ([8388657]
-			lambda nil
-			(interactive)
-			(exwm-workspace-switch-create 1))
-		 ([8388658]
-			lambda nil
-			(interactive)
-			(exwm-workspace-switch-create 2))
-		 ([8388659]
-			lambda nil
-			(interactive)
-			(exwm-workspace-switch-create 3))
-		 ([8388660]
-			lambda nil
-			(interactive)
-			(exwm-workspace-switch-create 4))
-		 ([8388661]
-			lambda nil
-			(interactive)
-			(exwm-workspace-switch-create 5))
-		 ([8388662]
-			lambda nil
-			(interactive)
-			(exwm-workspace-switch-create 6))
-		 ([8388663]
-			lambda nil
-			(interactive)
-			(exwm-workspace-switch-create 7))
-		 ([8388664]
-			lambda nil
-			(interactive)
-			(exwm-workspace-switch-create 8))
-		 ([8388665]
-			lambda nil
-			(interactive)
-			(exwm-workspace-switch-create 9))
-		 ([134217837]
-			. ignore))))
  '(indent-tabs-mode t)
- '(org-agenda-custom-commands
-   (quote
-    (("w" "Daily stuff:  Agenda + :thisweek:work: + :thisweek: "
-      ((agenda "" nil)
-       (tags-todo ":thisweek:work:"
-                  ((org-agenda-overriding-header "")))
-       (tags-todo ":thisweek:" nil)
-       (tags-todo ":Q1:" nil))
-      nil)
-     ("p" "Agenda and personal related tasks"
-      ((agenda "" nil)
-       (tags-todo "personal" nil))
-      nil)
-     ("d" "daily and review"
-      ((tags-todo "inbox" nil))
-      nil))))
  '(org-agenda-files
-	 (quote
-		(
-		 "~/org/angular.org"
-		 "~/org/bucketlist.org"
-		 "~/org/defcon.org"
-		 "~/org/dostackbufferoverflowgood_slides.org"
-		 "~/org/elearn.org"
-		 "~/org/google_10k_2019.org"
-		 "~/org/inbox.org"
-		 "~/org/learning.org"
-		 "~/org/metasploit.org"
-		 "~/org/notes.org"
-		 "~/org/osint.org"
-		 "~/org/overthewire.org"
-		 "~/org/pci.org"
-		 "~/org/pentest-tools.org"
-		 "~/org/pentesting.org"
-		 "~/org/personal.org"
-		 "~/org/pwk.org"
-		 "~/org/readings.org"
-		 "~/org/startupschool.org"
-		 "~/org/test.org"
-		 "~/org/work_related.org"
-		 "~/org/twistlock.org")))
- '(org-capture-templates
-	 (quote
-		(("b" "bookmark" entry
-			(file+headline "~/org/bookmark.org" "bookmark :bookmark:")
-			"* NOTE %i%?
- %U
-")
-     ("c" "Clock in what I am doing now" item
-      (file+headline "~/org/personal.org" "now :today:")
-      "%U %i")
-     ("1" "1-1 inbox [work]" checkitem
-      (file+olp "~/org/work_related.org" "1-1 this week :1on1:")
-      "- [ ] ")
-     ("p" "Personal [inbox]" entry
-      (file+headline "~/org/inbox.org" "Personal")
-      "* IDEA %i%?
- %U")
-     ("u" "urgent this week [inbox]" entry
-      (file+headline "~/org/inbox.org" "Personal-this-week")
-      "* TODO %i%?
- %U")
-     ("t" "Tech-experiments [inbox]" entry
-      (file+headline "~/org/inbox.org" "Tech-experiments")
-      "* IDEA %i%?
- %U")
-     ("i" "Self improvements [inbox]" entry
-      (file+headline "~/org/inbox.org" "Self improvements")
-      "* TODO %i%?
- %U")
-     ("d" "dream [ bucketlist - things I want to do eventually] " entry
-      (file "~/org/bucketlist.org")
-      "* TODO %i%? 
- %U")
-     ("w" "Work [inbox]" entry
-      (file+headline "~/org/work.org" "Inbox")
-      "* TODO %i%? 
- %U")
-     ("l" "login migration work [Work Inbox]" entry
-      (file+headline "~/org/work.org" "Login migration")
-      "* TODO %i%? 
- %U"))))
+   (quote
+    ("~/org/angular.org" "~/org/bucketlist.org" "~/org/defcon.org" "~/org/dostackbufferoverflowgood_slides.org" "~/org/elearn.org" "~/org/google_10k_2019.org" "~/org/inbox.org" "~/org/learning.org" "~/org/metasploit.org" "~/org/notes.org" "~/org/osint.org" "~/org/overthewire.org" "~/org/pci.org" "~/org/pentest-tools.org" "~/org/pentesting.org" "~/org/personal.org" "~/org/pwk.org" "~/org/readings.org" "~/org/startupschool.org" "~/org/test.org" "~/org/work_related.org" "~/org/twistlock.org")))
+ '(org-id-link-to-org-use-id t)
+ '(org-modules
+   (quote
+    (ol-bbdb ol-bibtex ol-docview ol-eww ol-gnus org-id ol-info ol-irc ol-mhe ol-rmail ol-w3m org-annotate-file)))
+ '(org-pretty-entities t)
+ '(org-startup-folded (quote content))
+ '(package-check-signature nil)
  '(package-selected-packages
-	 (quote
-		(network-watch insert-shebang fish-mode company-shell phpt-mode format-all dockerfile-mode inline-crypt enwc google-this company helm-exwm sql-indent org-wild-notifier org-alert org-plus-contrib yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode cython-mode company-anaconda anaconda-mode pythonic pocket-reader rjsx-mode tidal projectile-rails inflections feature-mode yaml-mode ivy-hydra counsel-projectile counsel swiper wgrep smex ivy ng2-mode yarn-mode web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data tide typescript-mode flycheck other-frame-window org-projectile-helm org-noter pdf-tools interleave deft org-projectile unfill smeargle rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restclient rbenv rake orgit org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim mmm-mode minitest markdown-toc markdown-mode magit-gitflow magit-popup htmlize helm-org-rifle helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy evil-magit magit transient git-commit with-editor company-statistics chruby bundler inf-ruby auto-yasnippet yasnippet ac-ispell auto-complete zoom company-tabnine ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async symon exwm))))
+   (quote
+    (org-drill org-timeline elfeed-web elfeed-org elfeed-goodies ace-jump-mode noflet flycheck-pos-tip xterm-color shell-pop tablist multi-term flyspell-correct-ivy flyspell-correct pos-tip eshell-z eshell-prompt-extras esh-help elfeed auto-dictionary network-watch insert-shebang fish-mode company-shell phpt-mode format-all dockerfile-mode inline-crypt enwc google-this company sql-indent org-wild-notifier org-alert org-plus-contrib yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode cython-mode company-anaconda anaconda-mode pythonic pocket-reader rjsx-mode tidal projectile-rails inflections feature-mode yaml-mode ivy-hydra counsel-projectile counsel swiper wgrep smex ivy ng2-mode yarn-mode web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data tide typescript-mode flycheck other-frame-window org-projectile-helm org-noter pdf-tools interleave deft org-projectile unfill smeargle rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restclient rbenv rake orgit org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim mmm-mode minitest markdown-toc markdown-mode magit-gitflow magit-popup htmlize helm-org-rifle helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy evil-magit magit transient git-commit with-editor company-statistics chruby bundler inf-ruby auto-yasnippet yasnippet ac-ispell auto-complete zoom company-tabnine ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async symon))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -40,6 +40,8 @@ values."
      ivy
      javascript
      markdown
+     ob-async
+     ob-restclient  ;; required for ob-async to work
      org
      python
      ruby

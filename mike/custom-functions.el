@@ -11,7 +11,7 @@
 (define-key (current-global-map) (kbd "C-x [") 'frame-bck)
 
 ;; custom setups
-(set-default 'truncate-line t)
+;; (set-default 'truncate-line t)
 (set-default 'word-wrap t)
 
 ;; global linum
@@ -19,12 +19,11 @@
     (global-display-line-numbers-mode)
   (global-linum-mode 1))
 
-;; display time inn the status line
+;; display time in the status line
 (display-time-mode 1)
 
 ;; allow neotree resize
 (setq neo-window-fixed-size nil)
-
 
 ;; auto-reload files from filesystem on git checkout branch
 ;; (global-auto-revert-mode 1)
@@ -38,6 +37,15 @@
 
 ;; make buffer sticky -- prevent another window open in the same buffer
 (global-set-key (kbd "C-c t") 'toggle-window-dedicated)
+
+;; make message buffer scroll to eof
+(add-hook 'post-command-hook
+          (lambda ()
+            (let ((messages (get-buffer "*Messages*")))
+              (unless (eq (current-buffer) messages)
+                (with-current-buffer messages
+                  (goto-char (point-max)))))))
+
 
 
 ;; load ace-jump
@@ -152,4 +160,38 @@
 
 ;; Remove this initial input in all commands:
 (setq ivy-initial-inputs-alist nil)
+
+
+;; C-x p p sends the current line or block to a shell
+(defun my/sh-send-line-or-region (&optional step)
+  (interactive ())
+  (let ((proc (get-process "shell"))
+        pbuf min max command)
+    (unless proc
+      (let ((currbuff (current-buffer)))
+        (shell)
+        (switch-to-buffer currbuff)
+        (setq proc (get-process "shell"))
+        ))
+    (setq pbuff (process-buffer proc))
+    (if (use-region-p)
+        (setq min (region-beginning)
+              max (region-end))
+      (setq min (point-at-bol)
+            max (point-at-eol)))
+    (setq command (concat (buffer-substring min max) "\n"))
+    (with-current-buffer pbuff
+      (goto-char (process-mark proc))
+      (insert command)
+      (move-marker (process-mark proc) (point))
+      (setq comint-scroll-to-bottom-on-output t)
+      )
+    (process-send-string  proc command)
+    (display-buffer (process-buffer proc) t)
+    (when step
+      (goto-char max)
+      (next-line))
+    ))
+
+(define-key (current-global-map) (kbd "C-x p p") 'my/sh-send-line-or-region)
 

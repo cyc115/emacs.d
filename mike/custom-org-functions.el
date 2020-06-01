@@ -58,6 +58,8 @@
           (tags-todo ":thisweek:work:" ((org-agenda-overriding-header "This week @ work")))
           (tags-todo "thisweek-work" ((org-agenda-overriding-header "This week -work and not scheduled")
                                       (org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled))))
+          (tags-todo "thisweek-work" ((org-agenda-overriding-header "This week -work and IS scheduled")
+                                      (org-agenda-skip-function '(org-agenda-skip-entry-if 'notscheduled))))
           (tags-todo "thisweek" ((org-agenda-overriding-header "This week (all)")))
           (tags-todo "Q1" ((org-agenda-overriding-header "This Quarter")))
           (tags-todo "inbox" ((org-agenda-overriding-header "All inbox")))

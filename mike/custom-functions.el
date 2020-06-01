@@ -162,7 +162,7 @@
 (setq ivy-initial-inputs-alist nil)
 
 
-;; C-x p p sends the current line or block to a shell
+;; sends the current line or block to a shell
 (defun my/sh-send-line-or-region (&optional step)
   (interactive ())
   (let ((proc (get-process "shell"))
@@ -194,4 +194,10 @@
     ))
 
 (define-key (current-global-map) (kbd "C-x p p") 'my/sh-send-line-or-region)
+
+
+;; move emacs backup files to a common directory
+(if (file-directory-p "~/.emacs.d/backup")
+    (setq backup-directory-alist '(("." . "~/.emacs.d/backup")))
+  (message "Directory does not exist: ~/.emacs.d/backup"))
 

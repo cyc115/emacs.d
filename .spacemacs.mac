@@ -33,6 +33,7 @@ values."
    '(
      auto-completion
      better-defaults
+     dockerfile-mode
      emacs-lisp
      elfeed
      git
@@ -363,74 +364,11 @@ you should place your code here."
       ((tags-todo "inbox" nil))
       nil))))
  '(org-agenda-files
-	 (quote
-		(
-		 "~/org/angular.org"
-		 "~/org/bucketlist.org"
-		 "~/org/defcon.org"
-		 "~/org/dostackbufferoverflowgood_slides.org"
-		 "~/org/elearn.org"
-		 "~/org/google_10k_2019.org"
-		 "~/org/inbox.org"
-		 "~/org/learning.org"
-		 "~/org/metasploit.org"
-		 "~/org/notes.org"
-		 "~/org/osint.org"
-		 "~/org/overthewire.org"
-		 "~/org/pci.org"
-		 "~/org/pentest-tools.org"
-		 "~/org/pentesting.org"
-		 "~/org/personal.org"
-		 "~/org/pwk.org"
-		 "~/org/readings.org"
-		 "~/org/startupschool.org"
-		 "~/org/test.org"
-		 "~/org/work_related.org"
-		 "~/org/twistlock.org")))
- '(org-capture-templates
-	 (quote
-		(("b" "bookmark" entry
-			(file+headline "~/org/bookmark.org" "bookmark :bookmark:")
-			"* NOTE %i%?
- %U
-")
-     ("c" "Clock in what I am doing now" item
-      (file+headline "~/org/personal.org" "now :today:")
-      "%U %i")
-     ("1" "1-1 inbox [work]" checkitem
-      (file+olp "~/org/work_related.org" "1-1 this week :1on1:")
-      "- [ ] ")
-     ("p" "Personal [inbox]" entry
-      (file+headline "~/org/inbox.org" "Personal")
-      "* IDEA %i%?
- %U")
-     ("u" "urgent this week [inbox]" entry
-      (file+headline "~/org/inbox.org" "Personal-this-week")
-      "* TODO %i%?
- %U")
-     ("t" "Tech-experiments [inbox]" entry
-      (file+headline "~/org/inbox.org" "Tech-experiments")
-      "* IDEA %i%?
- %U")
-     ("i" "Self improvements [inbox]" entry
-      (file+headline "~/org/inbox.org" "Self improvements")
-      "* TODO %i%?
- %U")
-     ("d" "dream [ bucketlist - things I want to do eventually] " entry
-      (file "~/org/bucketlist.org")
-      "* TODO %i%? 
- %U")
-     ("w" "Work [inbox]" entry
-      (file+headline "~/org/work.org" "Inbox")
-      "* TODO %i%? 
- %U")
-     ("l" "login migration work [Work Inbox]" entry
-      (file+headline "~/org/work.org" "Login migration")
-      "* TODO %i%? 
- %U"))))
+   (quote
+    ("~/org/bookmark.org" "~/org/inbox.org" "~/org/work_related.org" "~/org/learning.org" "~/org/work.org" "~/org/pwk.org" "~/org/pci.org" "~/org/personal.org" "~/org/pentest-tools.org")))
  '(package-selected-packages
    (quote
-    (google-this indium edit-server wgrep smex ivy-hydra lv flyspell-correct-ivy counsel-projectile counsel swiper ivy github-clone browse-at-remote howdoyou elfeed symon interleave powershell pdf-tools helm-org-rifle origami ob-async graphql-mode sql-indent devdocs csv-mode go-guru go-eldoc company-go go-mode helm-dash zoom wsd-mode prettier-js dockerfile-mode docker tablist docker-tramp groovy-mode restclient engine-mode org-trello helm-w3m w3m company-tabnine xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help idle-highlight-mode toml-mode racer flycheck-rust cargo rust-mode terraform-mode hcl-mode company-anaconda org-alert tea-time switch-window treepy graphql yaml-mode flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck auto-dictionary org-projectile-helm unfill smeargle reveal-in-osx-finder pbcopy osx-trash osx-dictionary orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim magit-gitflow launchctl htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy evil-magit magit magit-popup git-commit ghub with-editor company-web web-completion-data company-tern tern company-statistics company auto-yasnippet ac-ispell auto-complete yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode anaconda-mode pythonic sass-mode web-mode tagedit slim-mode scss-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode vue-mode edit-indirect ssass-mode vue-html-mode web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode mmm-mode markdown-toc markdown-mode gh-md spinner org-plus-contrib evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu undo-tree adaptive-wrap bundler vimrc-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest dactyl-mode chruby inf-ruby ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smartparens restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-search-highlight-persist evil-numbers evil-nerd-commenter evil goto-chg eval-sexp-fu highlight elisp-slime-nav dumb-jump diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup async evil-unimpaired f s dash)))
+    (slack org-timeline google-this indium edit-server wgrep smex ivy-hydra lv flyspell-correct-ivy counsel-projectile counsel swiper ivy github-clone browse-at-remote howdoyou elfeed symon interleave powershell pdf-tools helm-org-rifle origami ob-async graphql-mode sql-indent devdocs csv-mode go-guru go-eldoc company-go go-mode helm-dash zoom wsd-mode prettier-js dockerfile-mode docker tablist docker-tramp groovy-mode restclient engine-mode org-trello helm-w3m w3m company-tabnine xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help idle-highlight-mode toml-mode racer flycheck-rust cargo rust-mode terraform-mode hcl-mode company-anaconda org-alert tea-time switch-window treepy graphql yaml-mode flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck auto-dictionary org-projectile-helm unfill smeargle reveal-in-osx-finder pbcopy osx-trash osx-dictionary orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim magit-gitflow launchctl htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy evil-magit magit magit-popup git-commit ghub with-editor company-web web-completion-data company-tern tern company-statistics company auto-yasnippet ac-ispell auto-complete yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode anaconda-mode pythonic sass-mode web-mode tagedit slim-mode scss-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode vue-mode edit-indirect ssass-mode vue-html-mode web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode mmm-mode markdown-toc markdown-mode gh-md spinner org-plus-contrib evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu undo-tree adaptive-wrap bundler vimrc-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest dactyl-mode chruby inf-ruby ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smartparens restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-search-highlight-persist evil-numbers evil-nerd-commenter evil goto-chg eval-sexp-fu highlight elisp-slime-nav dumb-jump diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup async evil-unimpaired f s dash)))
  '(safe-local-variable-values
    (quote
     ((rspec-docker-cwd . "/home/bt/")

@@ -142,7 +142,7 @@
 (setq switch-window-shortcut-appearance 'asciiart)
 
 ;; elisp auto complete
-(add-hook 'emacs-lisp-mode-hook 'ielm-auto-complete)
+;; (add-hook 'emacs-lisp-mode-hook 'ielm-auto-complete)
 
 ;; ------------------------ language configurations -----------------------
 ;; does not warn about missing semicolon

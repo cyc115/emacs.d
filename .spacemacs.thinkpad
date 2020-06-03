@@ -40,8 +40,6 @@ values."
      ivy
      javascript
      markdown
-     ob-async
-     ob-restclient  ;; required for ob-async to work
      org
      python
      ruby
@@ -68,6 +66,8 @@ values."
                                       elfeed
                                       helm-org-rifle
                                       interleave
+																			ob-async
+																			ob-restclient  ;; required for ob-async to work
                                       org-drill
                                       org-noter
                                       org-plus-contrib
@@ -75,6 +75,7 @@ values."
                                       org-projectile
                                       orgit
                                       pdf-tools
+                                      python
                                       restclient
                                       yarn-mode
                                       zoom

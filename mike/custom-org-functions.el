@@ -70,6 +70,12 @@
           ;; (org-agenda-start-with-clockreport-mode t)
           )
          )
+        ("cu" "Unscheduled TODO"
+         ((todo ""
+                ((org-agenda-overriding-header "\nUnscheduled TODO")
+                 (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp)))))
+         nil
+         nil)
         ("p" "Agenda and personal related tasks"
          ((agenda "" nil)
           (tags-todo "personal" nil))

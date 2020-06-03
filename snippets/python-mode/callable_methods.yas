@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+#name : display callable methods of a given object
+#key : .callable_methods.
+# --
+callable_methods = [method_names for method_names in dir($1) if callable(getattr($1, method_names))]

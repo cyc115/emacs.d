@@ -201,3 +201,7 @@
     (setq backup-directory-alist '(("." . "~/.emacs.d/backup")))
   (message "Directory does not exist: ~/.emacs.d/backup"))
 
+
+;; set indentations:
+(setq sh-basic-offset 2)
+

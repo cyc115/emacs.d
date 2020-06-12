@@ -1,3 +1,10 @@
+(defun my/org-add-property-with-date-captured ()
+  "Add DATE_CAPTURED property to the current item."
+  (interactive)
+  (org-set-property "DATE_CAPTURED" (format-time-string "[%F]")))
+
+(add-hook 'org-capture-before-finalize-hook 'my/org-add-property-with-date-captured)
+
 (setq org-capture-templates
       '(
         ("b" "bookmark" entry
@@ -8,6 +15,9 @@
         ("1" "1-1 inbox [work_related]" checkitem
          (file+olp "~/org/work_related.org" "1-1s")
          "- [ ] ")
+				("o" "1-1 notes [work_related]" entry
+         (file+headline "~/org/work_related.org" "1-1s")
+         "** TODO %t 1-1 with %?")
         ("p" "Personal [inbox]" entry
          (file+headline "~/org/inbox.org" "Personal")
          "* IDEA %i%?

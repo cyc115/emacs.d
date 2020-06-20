@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: sudo k3s kubectl
+# key: skk
+# --
+
+sudo k3s kubectl

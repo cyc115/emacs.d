@@ -3,6 +3,6 @@
 # key: .ssrc.
 # --
 
-#+BEGIN_SRC txt$2
+#+BEGIN_SRC text$2
 $1
 #+END_SRC

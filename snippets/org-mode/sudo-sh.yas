@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: sudo src
+# key: .sudosrc.
+# --
+#+BEGIN_SRC sh :dir /sudo::
+$1
+#+END_SRC
